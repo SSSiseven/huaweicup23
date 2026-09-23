@@ -1,0 +1,2 @@
+﻿trip_id,service_id,type_id,box_ids,mass_kg,volume_m3,duration_s,energy_kwh,return_soc
+P1-Q1-01,S012,B,S012-MED-01;S012-WAT-01;S012-FOD-01,25.0,0.067,1923.8014247171473,2.7551935342850182,0.31120161642874544

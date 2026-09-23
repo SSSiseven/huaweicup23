@@ -1,0 +1,31 @@
+{
+  "mode": "full_partial_q1_q2",
+  "seed": 20260923,
+  "input_hashes": {
+    "D题\\数据\\无人机应急物资运输基础数据\\调度中心与服务区.xlsx": "541A7AF1DED08C9A3FF448480332CB5F6A54902F0AFA6E9BCD50C1D2B2B34E38",
+    "D题\\数据\\无人机应急物资运输基础数据\\物资需求与配送时限.xlsx": "5A3346159CEDDCF585859D270B8F62114B388A1F737FBE64FFDE0EE1FDC8170A",
+    "D题\\数据\\无人机应急物资运输基础数据\\运输无人机数据.xlsx": "9296A657C07E042AFBA6AEEA7999665D9CD24E00B592FD6C269DE6E338480DCB",
+    "D题\\数据\\无人机应急物资运输基础数据\\中继无人机数据.xlsx": "BE52643FF29419233E6A141DCA03A04160A8AF551CAB36D8C49B51BB836BEA04",
+    "D题\\数据\\无人机应急物资运输基础数据\\通信链路参数.xlsx": "1860D153199E7AE460BA36E83B673374E640E19DE91EA167F2877271001F5F81",
+    "D题\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif": "741FE6DE0B2BCAFFD0F4007F574EE698D46197094F52CC954B532C4F90FC7C03"
+  },
+  "q1": {
+    "trip_count": 18,
+    "energy_kwh": 59.2319864139716,
+    "duration_s": 32777.29130693076,
+    "safe_payload_rows": 45
+  },
+  "q2": {
+    "trip_count": 26,
+    "hard_late_count": 0,
+    "makespan_s": 12695.763193631043,
+    "energy_kwh": 83.00133021304487,
+    "wtd": 111.45007536160688,
+    "multi_stop_trips": 5
+  },
+  "sanity": {
+    "q1_unique_cover": true,
+    "q2_unique_cover": true,
+    "q2_zero_hard_late": true
+  }
+}

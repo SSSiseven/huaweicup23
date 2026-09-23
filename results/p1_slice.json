@@ -1,0 +1,202 @@
+{
+  "mode": "slice",
+  "seed": 20260923,
+  "python": "3.11.6 (tags/v3.11.6:8b6ee5b, Oct  2 2023, 14:57:12) [MSC v.1935 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.22631-SP0",
+  "input_hashes": {
+    "D题\\数据\\无人机应急物资运输基础数据\\调度中心与服务区.xlsx": "541A7AF1DED08C9A3FF448480332CB5F6A54902F0AFA6E9BCD50C1D2B2B34E38",
+    "D题\\数据\\无人机应急物资运输基础数据\\物资需求与配送时限.xlsx": "5A3346159CEDDCF585859D270B8F62114B388A1F737FBE64FFDE0EE1FDC8170A",
+    "D题\\数据\\无人机应急物资运输基础数据\\运输无人机数据.xlsx": "9296A657C07E042AFBA6AEEA7999665D9CD24E00B592FD6C269DE6E338480DCB",
+    "D题\\数据\\无人机应急物资运输基础数据\\中继无人机数据.xlsx": "BE52643FF29419233E6A141DCA03A04160A8AF551CAB36D8C49B51BB836BEA04",
+    "D题\\数据\\无人机应急物资运输基础数据\\通信链路参数.xlsx": "1860D153199E7AE460BA36E83B673374E640E19DE91EA167F2877271001F5F81",
+    "D题\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif": "741FE6DE0B2BCAFFD0F4007F574EE698D46197094F52CC954B532C4F90FC7C03"
+  },
+  "data_counts": {
+    "services": 15,
+    "boxes": 80,
+    "demand_summary_records": 53,
+    "transport_units": 8
+  },
+  "distance_error": {
+    "max_abs_m": 0.00018048772381007439,
+    "max_rel": 2.4395344229212894e-08
+  },
+  "link_thresholds_db": {
+    "transport_gateway": 122.0,
+    "transport_relay": 116.0,
+    "relay_gateway": 126.0
+  },
+  "q1": {
+    "service": "S012",
+    "safe_payload_kg": {
+      "A": 25.0,
+      "B": 30.0,
+      "C": 68.01466944009633
+    },
+    "trip_count": 1,
+    "total_energy_kwh": 2.7551935342850182,
+    "total_duration_s": 1923.8014247171473,
+    "box_cover_count": 3
+  },
+  "q2": {
+    "trips": [
+      {
+        "trip_id": "P1-Q2-01",
+        "unit_id": "U05",
+        "battery_id": "B-BAT-01",
+        "type_id": "B",
+        "service_id": "S012",
+        "start_s": 0.0,
+        "takeoff_s": 330.0,
+        "arrival_s": 971.8307123585736,
+        "depart_service_s": 1151.8307123585737,
+        "return_s": 1803.8014247171473,
+        "payload_kg": 3.0,
+        "energy_kwh": 2.2346720770444106,
+        "return_soc": 0.44133198073889734,
+        "outbound_cruise_m": 413.3009948730469,
+        "inbound_cruise_m": 413.3009948730469
+      },
+      {
+        "trip_id": "P1-Q2-02",
+        "unit_id": "U06",
+        "battery_id": "B-BAT-02",
+        "type_id": "B",
+        "service_id": "S014",
+        "start_s": 0.0,
+        "takeoff_s": 330.0,
+        "arrival_s": 941.8558926144482,
+        "depart_service_s": 1121.8558926144483,
+        "return_s": 1748.5984518955631,
+        "payload_kg": 3.0,
+        "energy_kwh": 1.7352891747706858,
+        "return_soc": 0.5661777063073286,
+        "outbound_cruise_m": 591.9473876953125,
+        "inbound_cruise_m": 591.9473876953125
+      }
+    ],
+    "deliveries": [
+      {
+        "trip_id": "P1-Q2-01",
+        "box_id": "S012-MED-01",
+        "service_id": "S012",
+        "completion_s": 1151.8307123585737,
+        "hard_deadline_s": 3600.0,
+        "hard_on_time": true
+      },
+      {
+        "trip_id": "P1-Q2-02",
+        "box_id": "S014-MED-01",
+        "service_id": "S014",
+        "completion_s": 1121.8558926144483,
+        "hard_deadline_s": 3600.0,
+        "hard_on_time": true
+      }
+    ],
+    "hard_deadline_violations": 0,
+    "effective_deadlines_s": {
+      "S012-MED-01": 3600.0,
+      "S014-MED-01": 3600.0
+    }
+  },
+  "q3": {
+    "relay": {
+      "needed": true,
+      "lon": 109.26083333333334,
+      "lat": 23.014444444444447,
+      "ground_m": 306.0795593261719,
+      "agl_m": 300.0,
+      "altitude_m": 606.0795593261719,
+      "coverage_fraction": 1.0,
+      "blackout_samples": 369,
+      "min_link_margin_db": 1.946071978044202,
+      "backhaul_margin_db": 5.919152760986776,
+      "distance_m": 3138.6903006106036,
+      "cruise_alt_m": 606.0795593261719,
+      "outbound_s": 328.8409098722499,
+      "return_s": 368.7058731494309,
+      "link_ready_offset_s": 538.8409098722499,
+      "energy_kwh": 0.6357128506334269,
+      "return_soc": 0.8013397341770541,
+      "feasible_energy": true,
+      "backhaul_certificate_margin_db": 5.919152760986776,
+      "backhaul_certificate_clearance_m": -13.193915524733228,
+      "relay_start_s": 0.0,
+      "relay_unit_id": "R01",
+      "energy_pack_id": "R-PACK-01",
+      "relay_takeoff_s": 180.0,
+      "relay_arrival_s": 508.8409098722499,
+      "link_ready_s": 538.8409098722499,
+      "service_end_s": 2012.642334589397,
+      "relay_return_s": 2381.348207738828,
+      "relay_available_s": 2681.348207738828,
+      "pack_task_start_s": 0.0,
+      "pack_task_end_s": 2381.348207738828,
+      "pack_charge_start_s": 2381.348207738828,
+      "pack_charge_duration_s": 758.2583455698298,
+      "pack_charge_complete_s": 3139.6065533086576,
+      "transport_start_s": 208.84090987224988,
+      "transport_takeoff_s": 538.8409098722499,
+      "transport_return_s": 2012.642334589397,
+      "transport_delivery_s": 1360.6716222308235,
+      "transport_hard_deadline_s": 3600.0,
+      "transport_hard_on_time": true,
+      "ready_before_transport_takeoff": true
+    },
+    "continuous_check": {
+      "tol_s": 0.1,
+      "leaf_intervals": 55,
+      "outage_intervals": 0,
+      "unresolved_intervals": 0,
+      "max_unresolved_interval_s": 0.0,
+      "min_certified_margin_lower_db": 0.22187373250136488,
+      "max_leaf_plan_sweep_m": 295.9633094229573,
+      "grid_step_s": 0.05,
+      "grid_samples": 29478,
+      "grid_outages": 0,
+      "grid_min_margin_db": 1.946071978044202
+    }
+  },
+  "q4": [
+    {
+      "resource": "B_uav",
+      "total_group_need": 2,
+      "inventory": 2,
+      "shortfall": 0,
+      "central_need": 2,
+      "partition_redundancy": 0
+    },
+    {
+      "resource": "B_battery",
+      "total_group_need": 2,
+      "inventory": 4,
+      "shortfall": 0,
+      "central_need": 2,
+      "partition_redundancy": 0
+    },
+    {
+      "resource": "relay_uav",
+      "total_group_need": 2,
+      "inventory": 2,
+      "shortfall": 0,
+      "central_need": 1,
+      "partition_redundancy": 1
+    },
+    {
+      "resource": "relay_pack",
+      "total_group_need": 2,
+      "inventory": 6,
+      "shortfall": 0,
+      "central_need": 1,
+      "partition_redundancy": 1
+    }
+  ],
+  "sanity": {
+    "no_nan_inf": true,
+    "q1_unique_cover": true,
+    "q2_zero_hard_late": true,
+    "q3_zero_outage_intervals": true,
+    "q3_relay_ready_before_takeoff": true,
+    "q4_global_inventory_formula": true
+  }
+}

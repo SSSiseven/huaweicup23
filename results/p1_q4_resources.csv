@@ -1,0 +1,5 @@
+﻿resource,total_group_need,inventory,shortfall,central_need,partition_redundancy
+B_uav,2,2,0,2,0
+B_battery,2,4,0,2,0
+relay_uav,2,2,0,1,1
+relay_pack,2,6,0,1,1

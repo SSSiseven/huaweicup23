@@ -1,0 +1,3 @@
+﻿trip_id,box_id,service_id,completion_s,hard_deadline_s,hard_on_time
+P1-Q2-01,S012-MED-01,S012,1151.8307123585737,3600.0,True
+P1-Q2-02,S014-MED-01,S014,1121.8558926144483,3600.0,True
