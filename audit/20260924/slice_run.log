@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "sanity": {
+    "no_nan_inf": true,
+    "q1_unique_cover": true,
+    "q2_zero_hard_late": true,
+    "q3_zero_outage_intervals": true,
+    "q3_relay_ready_before_takeoff": true,
+    "q4_global_inventory_formula": true
+  },
+  "q1": {
+    "service": "S012",
+    "safe_payload_kg": {
+      "A": 25.0,
+      "B": 30.0,
+      "C": 68.01466944009633
+    },
+    "trip_count": 1,
+    "total_energy_kwh": 2.7551935342850182,
+    "total_duration_s": 1923.8014247171473,
+    "box_cover_count": 3
+  },
+  "q2": {
+    "S012-MED-01": 3600.0,
+    "S014-MED-01": 3600.0
+  },
+  "q3": {
+    "tol_s": 0.1,
+    "leaf_intervals": 55,
+    "outage_intervals": 0,
+    "unresolved_intervals": 0,
+    "max_unresolved_interval_s": 0.0,
+    "min_certified_margin_lower_db": 0.22187373250136488,
+    "max_leaf_plan_sweep_m": 295.9633094229573,
+    "grid_step_s": 0.05,
+    "grid_samples": 29478,
+    "grid_outages": 0,
+    "grid_min_margin_db": 1.946071978044202
+  }
+}
