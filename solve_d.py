@@ -115,9 +115,26 @@ class DemGrid:
     def path_elevations(
         self, lon1: float, lat1: float, lon2: float, lat2: float, step_m: float = 15.0
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Sample densely and include one point inside every crossed NN DEM cell."""
         dist = horizontal_distance_m(lon1, lat1, lon2, lat2)
         count = max(3, int(math.ceil(dist / step_m)) + 1)
-        frac = np.linspace(0.0, 1.0, count)
+        dense = np.linspace(0.0, 1.0, count)
+        cuts = [0.0, 1.0]
+        axes = (
+            ((lon1 - self.lon0) / self.dx, (lon2 - self.lon0) / self.dx),
+            ((self.lat0 - lat1) / self.dy, (self.lat0 - lat2) / self.dy),
+        )
+        for start, end in axes:
+            if abs(end - start) <= 1e-15:
+                continue
+            for boundary in range(math.floor(min(start, end)) - 1,
+                                  math.ceil(max(start, end)) + 1):
+                tau = (boundary + 0.5 - start) / (end - start)
+                if 0.0 < tau < 1.0:
+                    cuts.append(tau)
+        cuts = sorted(set(cuts))
+        cell_midpoints = [(left + right) / 2.0 for left, right in zip(cuts, cuts[1:])]
+        frac = np.unique(np.concatenate([dense, np.asarray(cell_midpoints)]))
         lons = lon1 + frac * (lon2 - lon1)
         lats = lat1 + frac * (lat2 - lat1)
         cols = np.rint((lons - self.lon0) / self.dx).astype(int)
@@ -314,6 +331,8 @@ def direct_round_trip(dem: DemGrid, depot: Node, service: Node, g: TransportType
 
 def max_safe_payload(dem: DemGrid, depot: Node, service: Node, g: TransportType) -> float:
     limit = (1.0 - g.reserve) * g.energy_kwh
+    if direct_round_trip(dem, depot, service, g, 0.0)["energy_kwh"] > limit:
+        return float("nan")
     if direct_round_trip(dem, depot, service, g, g.payload_kg)["energy_kwh"] <= limit:
         return g.payload_kg
     lo, hi = 0.0, g.payload_kg
@@ -1469,7 +1488,9 @@ def _trip_spec_key(spec: dict[str, Any], boxes: pd.DataFrame) -> tuple[float, fl
 
 
 def _build_q2_specs(
-    data: dict[str, Any], q1_by_service: dict[str, list[dict[str, Any]]]
+    data: dict[str, Any],
+    q1_by_service: dict[str, list[dict[str, Any]]],
+    hard_assignments: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     boxes: pd.DataFrame = data["boxes"]
     hard_specs: list[dict[str, Any]] = []
@@ -1478,9 +1499,50 @@ def _build_q2_specs(
         service_boxes = boxes[boxes["服务区编号"] == service_id].copy()
         service_boxes["_hard"] = service_boxes.apply(box_deadline, axis=1)
         hard_ids = service_boxes.loc[service_boxes["_hard"].notna(), "货箱编号"].tolist()
-        if hard_ids:
-            hard_specs.append({"stops": [{"service_id": service_id, "box_ids": hard_ids}], "kind": "hard"})
         soft = service_boxes[service_boxes["_hard"].isna()].drop(columns=["_hard"])
+        if hard_ids:
+            chosen_soft: list[str] = []
+            forced_unit = (hard_assignments or {}).get(service_id)
+            if forced_unit is not None and len(soft):
+                type_id = next(
+                    x["type_id"] for x in data["transport_units"] if x["unit_id"] == forced_unit
+                )
+                g = data["transport_types"][type_id]
+                soft_rows = soft.reset_index(drop=True)
+                best: tuple[tuple[float, int, float, float], list[str]] | None = None
+                for mask in range(1 << len(soft_rows)):
+                    extra_ids = [
+                        str(soft_rows.iloc[i]["货箱编号"])
+                        for i in range(len(soft_rows)) if mask & (1 << i)
+                    ]
+                    ids = hard_ids + extra_ids
+                    timeline = route_timeline(
+                        data["dem"], data["nodes"]["O01"], data["nodes"], g, boxes,
+                        [{"service_id": service_id, "box_ids": ids}], 0.0,
+                    )
+                    if timeline is None or any(
+                        not row["hard_on_time"] for row in timeline["completions"]
+                    ):
+                        continue
+                    selected = soft_rows[soft_rows["货箱编号"].astype(str).isin(extra_ids)]
+                    urgency = float(
+                        (selected["应急优先系数"] / selected["期望送达时间（s）"]).sum()
+                    )
+                    score = (
+                        urgency,
+                        len(extra_ids),
+                        float(selected["单箱质量（kg）"].sum()),
+                        -float(timeline["energy_kwh"]),
+                    )
+                    if best is None or score > best[0]:
+                        best = (score, extra_ids)
+                if best is not None:
+                    chosen_soft = best[1]
+                    soft = soft[~soft["货箱编号"].astype(str).isin(chosen_soft)]
+            hard_specs.append(
+                {"stops": [{"service_id": service_id, "box_ids": hard_ids + chosen_soft}],
+                 "kind": "hard", **({"forced_unit": forced_unit} if forced_unit else {})}
+            )
         if len(soft):
             for batch in exact_q1_service(
                 data["dem"], data["nodes"]["O01"], data["nodes"][service_id], soft,
@@ -1583,7 +1645,12 @@ def _schedule_q2(data: dict[str, Any], specs: list[dict[str, Any]]) -> tuple[lis
     urgent = [x for x in specs if _trip_spec_key(x, boxes)[0] == 3600.0]
     remaining = [x for x in specs if x not in urgent]
     all_units = [u["unit_id"] for u in data["transport_units"]]
-    if len(urgent) == len(all_units):
+    if urgent and all(x.get("forced_unit") for x in urgent):
+        initial_choices = [
+            min(options(spec, forced_unit=spec["forced_unit"]), key=lambda x: x[0])
+            for spec in urgent
+        ]
+    elif len(urgent) == len(all_units):
         pair_options: dict[tuple[int, str], tuple[Any, ...]] = {}
         for job_index, spec in enumerate(urgent):
             for unit_id in all_units:
@@ -1613,7 +1680,7 @@ def _schedule_q2(data: dict[str, Any], specs: list[dict[str, Any]]) -> tuple[lis
 
     ordered_choices: list[tuple[dict[str, Any], tuple[Any, ...]]] = list(zip(urgent, initial_choices))
     for spec in remaining:
-        candidates = options(spec)
+        candidates = options(spec, forced_unit=spec.get("forced_unit"))
         if not candidates:
             raise RuntimeError(f"No feasible resource assignment for {spec}")
         ordered_choices.append((spec, min(candidates, key=lambda x: x[0])))
@@ -1642,7 +1709,7 @@ def _schedule_q2(data: dict[str, Any], specs: list[dict[str, Any]]) -> tuple[lis
     battery_ready = {battery: 0.0 for values in battery_ids.values() for battery in values}
     final_sequence: list[tuple[dict[str, Any], str | None]] = [
         (spec, choice[2]) for spec, choice in ordered_choices[: len(urgent)]
-    ] + [(spec, None) for spec in remaining]
+    ] + [(spec, spec.get("forced_unit")) for spec in remaining]
     for trip_index, (spec, forced_unit) in enumerate(final_sequence, start=1):
         candidates = options(spec, forced_unit=forced_unit)
         if not candidates:
@@ -1814,15 +1881,18 @@ def _schedule_q3_joint(
         "P2B": (109.22555555555556, 23.069444444444446, 626.3524169921875),
         "P3A": (109.23833333333333, 23.052777777777777, 534.8773498535156),
     }
+    if len(q2_trips) != 22:
+        raise ValueError(
+            f"Q3 relay wave plan is bound to the selected 22-trip Q2 solution, got {len(q2_trips)}"
+        )
     wave_definitions = [
         ("W1", list(range(0, 8)), ["P1A", "P1B"]),
         ("W2", list(range(8, 12)), ["P2A", "P2B"]),
         ("W3", list(range(12, 15)), ["P3A"]),
-        ("W4", list(range(15, 17)), []),
-        ("W5", list(range(17, 19)), ["P1B", "P2A"]),
-        ("W6", list(range(19, 21)), ["P2A", "P2B"]),
-        ("W7", [21], ["P2A", "P2B"]),
-        ("W8", list(range(22, 26)), ["P1A", "P1B"]),
+        ("W4", list(range(15, 17)), ["P1A", "P1B"]),
+        ("W5", list(range(17, 19)), ["P2B"]),
+        ("W6", list(range(19, 21)), ["P1A", "P2A"]),
+        ("W7", [21], ["P2A"]),
     ]
     boxes, dem, nodes, types = data["boxes"], data["dem"], data["nodes"], data["transport_types"]
     depot = nodes["O01"]
@@ -1852,13 +1922,12 @@ def _schedule_q3_joint(
                 key=lambda p: (max(pack_ready[p], relay_unit_ready[unit_id]), p),
             )
             reserved_packs.add(pack_id)
-            start_s = max(relay_unit_ready[unit_id], pack_ready[pack_id])
+            resource_ready_s = max(relay_unit_ready[unit_id], pack_ready[pack_id])
             point = points[point_name]
             preliminary = relay_flight_metrics(dem, depot, relay_type, *point, 0.0)
             assignments.append(
                 {"point_name": point_name, "point": point, "unit_id": unit_id, "pack_id": pack_id,
-                 "start_s": start_s, "preliminary": preliminary,
-                 "link_ready_s": start_s + preliminary["link_ready_offset_s"]}
+                 "resource_ready_s": resource_ready_s, "preliminary": preliminary}
             )
         common_start = max(
             [unit_ready[x["unit_id"]] for x in selected]
@@ -1866,12 +1935,27 @@ def _schedule_q3_joint(
             + [0.0]
         )
         if assignments:
-            latest_link = max(x["link_ready_s"] for x in assignments)
             min_ground_prep = min(
                 types[x["type_id"]].prep_s + len(x["box_ids"]) * types[x["type_id"]].load_per_box_s
                 for x in selected
             )
-            common_start = max(common_start, latest_link - min_ground_prep)
+            common_start = max(
+                common_start,
+                max(
+                    x["resource_ready_s"] + x["preliminary"]["link_ready_offset_s"]
+                    - min_ground_prep
+                    for x in assignments
+                ),
+            )
+            for assignment in assignments:
+                assignment["start_s"] = (
+                    common_start + min_ground_prep
+                    - assignment["preliminary"]["link_ready_offset_s"]
+                )
+                assignment["link_ready_s"] = (
+                    assignment["start_s"]
+                    + assignment["preliminary"]["link_ready_offset_s"]
+                )
 
         wave_trips: list[dict[str, Any]] = []
         for original in selected:
@@ -1966,11 +2050,28 @@ def _schedule_q3_joint(
         completion for trip in q3_trips for completion in trip["completions"]
         if completion["hard_deadline_s"] is not None and not completion["hard_on_time"]
     ]
+    actual_service: dict[str, set[str]] = {x["mission_id"]: set() for x in relay_missions}
+    for row in communication_rows:
+        mission_id = str(row["relay_mission_id"])
+        if mission_id:
+            actual_service[mission_id].add(str(row["trip_id"]))
+    for mission in relay_missions:
+        mission["served_trip_ids"] = sorted(actual_service[mission["mission_id"]])
     transport_makespan_s = max(x["return_s"] for x in q3_trips)
     relay_makespan_s = max(x["return_s"] for x in relay_missions)
     joint_makespan_s = max(transport_makespan_s, relay_makespan_s)
     summary = {
+        "trip_count": len(q3_trips),
         "hard_late_count": len(hard_late),
+        "soft_late_count": sum(
+            completion["hard_deadline_s"] is None and completion["tardiness_s"] > 1e-9
+            for trip in q3_trips for completion in trip["completions"]
+        ),
+        "wtd": sum(
+            completion["priority"] * completion["tardiness_s"] / completion["expected_s"]
+            for trip in q3_trips for completion in trip["completions"]
+            if completion["hard_deadline_s"] is None
+        ),
         "outage_interval_count": sum(x["outage_intervals"] for x in proof_summaries),
         "grid_outage_count": sum(x["grid_outages"] for x in proof_summaries),
         "min_margin_lower_db": min(x["min_margin_lower_db"] for x in proof_summaries),
@@ -2098,6 +2199,176 @@ def _solve_q4_partitions(
     return output_rows, summary_rows
 
 
+def _q2_score(trips: list[dict[str, Any]], deliveries: list[dict[str, Any]]) -> tuple[float, ...]:
+    """Lexicographic Q2 objective used to compare feasible construction variants."""
+    hard_late = sum(
+        row["hard_deadline_s"] is not None and not row["hard_on_time"] for row in deliveries
+    )
+    wtd = sum(
+        row["priority"] * row["tardiness_s"] / row["expected_s"]
+        for row in deliveries if row["hard_deadline_s"] is None
+    )
+    return (
+        float(hard_late),
+        float(wtd),
+        max(float(x["return_s"]) for x in trips),
+        sum(float(x["energy_kwh"]) for x in trips),
+        float(len(trips)),
+    )
+
+
+def run_q2_revision(project_root: Path) -> dict[str, Any]:
+    """Recompute Q2 with a hard-only baseline and a same-service mixed-load variant."""
+    data = load_inputs(project_root)
+    results_dir = project_root / "results"
+    results_dir.mkdir(exist_ok=True)
+    nodes, boxes, types, dem = (
+        data["nodes"], data["boxes"], data["transport_types"], data["dem"]
+    )
+    depot = nodes["O01"]
+    q1_by_service = {
+        service_id: exact_q1_service(
+            dem, depot, nodes[service_id], boxes[boxes["服务区编号"] == service_id], types
+        )
+        for service_id in sorted(k for k in nodes if k.startswith("S"))
+    }
+    baseline_specs = _build_q2_specs(data, q1_by_service)
+    baseline_trips, baseline_deliveries = _schedule_q2(data, baseline_specs)
+    indexed = boxes.set_index("货箱编号", drop=False)
+    assignments: dict[str, str] = {}
+    for trip in baseline_trips:
+        rows = indexed.loc[trip["box_ids"]]
+        if bool(rows.apply(box_deadline, axis=1).notna().all()):
+            assignments[str(trip["route"][0])] = str(trip["unit_id"])
+    mixed_specs = _build_q2_specs(data, q1_by_service, assignments)
+    mixed_trips, mixed_deliveries = _schedule_q2(data, mixed_specs)
+    candidates = [
+        ("hard_only_baseline", baseline_trips, baseline_deliveries),
+        ("mixed_hard_soft", mixed_trips, mixed_deliveries),
+    ]
+    variant, trips, deliveries = min(candidates, key=lambda x: _q2_score(x[1], x[2]))
+    trip_rows = [
+        {k: v for k, v in trip.items() if k not in ("leg_records", "service_records")}
+        for trip in trips
+    ]
+    for row in trip_rows:
+        row["route"] = ";".join(row["route"])
+        row["box_ids"] = ";".join(row["box_ids"])
+    pd.DataFrame(trip_rows).to_csv(
+        results_dir / "q2_transport_trips.csv", index=False, encoding="utf-8-sig"
+    )
+    pd.DataFrame(deliveries).to_csv(
+        results_dir / "q2_box_deliveries.csv", index=False, encoding="utf-8-sig"
+    )
+    cover = pd.Series([box_id for trip in trips for box_id in trip["box_ids"]]).value_counts()
+    report = {
+        "mode": "q2",
+        "variant": variant,
+        "input_hashes": data["input_hashes"],
+        "baseline_score": list(_q2_score(baseline_trips, baseline_deliveries)),
+        "selected_score": list(_q2_score(trips, deliveries)),
+        "trip_count": len(trips),
+        "multi_stop_trips": sum(len(x["route"]) > 1 for x in trips),
+        "hard_late_count": int(_q2_score(trips, deliveries)[0]),
+        "soft_late_count": sum(
+            row["hard_deadline_s"] is None and row["tardiness_s"] > 1e-9
+            for row in deliveries
+        ),
+        "wtd": _q2_score(trips, deliveries)[1],
+        "makespan_s": _q2_score(trips, deliveries)[2],
+        "energy_kwh": _q2_score(trips, deliveries)[3],
+        "sanity": {
+            "unique_cover": len(cover) == len(boxes) and bool((cover == 1).all()),
+            "zero_hard_late": _q2_score(trips, deliveries)[0] == 0,
+        },
+    }
+    (results_dir / "q2_results.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8"
+    )
+    return report
+
+
+def run_q34_revision(project_root: Path) -> dict[str, Any]:
+    """Propagate the selected Q2 CSV through communication scheduling and partitioning."""
+    data = load_inputs(project_root)
+    results_dir = project_root / "results"
+    frame = pd.read_csv(results_dir / "q2_transport_trips.csv")
+    q2_trips: list[dict[str, Any]] = []
+    for row in frame.to_dict("records"):
+        row["route"] = str(row["route"]).split(";")
+        row["box_ids"] = str(row["box_ids"]).split(";")
+        q2_trips.append(row)
+    q3_trips, relay_missions, communication_rows, q3_summary = _schedule_q3_joint(
+        data, q2_trips
+    )
+    q3_trip_rows = []
+    for trip in q3_trips:
+        row = {
+            k: v for k, v in trip.items()
+            if k not in ("leg_records", "service_records", "completions")
+        }
+        row["route"] = ";".join(row["route"])
+        row["box_ids"] = ";".join(row["box_ids"])
+        q3_trip_rows.append(row)
+    q3_delivery_rows = [
+        {"trip_id": trip["trip_id"], **completion}
+        for trip in q3_trips for completion in trip["completions"]
+    ]
+    relay_rows = []
+    for mission in relay_missions:
+        row = dict(mission)
+        row["served_trip_ids"] = ";".join(row["served_trip_ids"])
+        relay_rows.append(row)
+    pd.DataFrame(q3_trip_rows).to_csv(
+        results_dir / "q3_transport_trips.csv", index=False, encoding="utf-8-sig"
+    )
+    pd.DataFrame(q3_delivery_rows).to_csv(
+        results_dir / "q3_box_deliveries.csv", index=False, encoding="utf-8-sig"
+    )
+    pd.DataFrame(relay_rows).to_csv(
+        results_dir / "q3_relay_missions.csv", index=False, encoding="utf-8-sig"
+    )
+    pd.DataFrame(communication_rows).to_csv(
+        results_dir / "q3_communication_segments.csv", index=False, encoding="utf-8-sig"
+    )
+    q4_rows, q4_summary = _solve_q4_partitions(data, q3_trips, relay_missions)
+    pd.DataFrame(q4_rows).to_csv(
+        results_dir / "q4_partition_resources.csv", index=False, encoding="utf-8-sig"
+    )
+    pd.DataFrame(q4_summary).to_csv(
+        results_dir / "q4_shortage_redundancy.csv", index=False, encoding="utf-8-sig"
+    )
+    cover = pd.Series(
+        [box_id for trip in q3_trips for box_id in trip["box_ids"]]
+    ).value_counts()
+    report = {
+        "mode": "q34",
+        "input_hashes": data["input_hashes"],
+        "q3": q3_summary,
+        "q4": {
+            "partition_rows": len(q4_rows),
+            "summary_rows": len(q4_summary),
+            "max_shortfall": max(row["shortfall"] for row in q4_summary),
+        },
+        "sanity": {
+            "q3_unique_cover": len(cover) == len(data["boxes"]) and bool((cover == 1).all()),
+            "q3_zero_hard_late": q3_summary["hard_late_count"] == 0,
+            "q3_zero_continuous_outage": q3_summary["outage_interval_count"] == 0,
+            "q3_zero_grid_outage": q3_summary["grid_outage_count"] == 0,
+            "q4_formulas": all(
+                row["shortfall"] == max(0, row["total_group_need"] - row["inventory"])
+                and row["partition_redundancy"]
+                == row["total_group_need"] - row["central_need"]
+                for row in q4_summary
+            ),
+        },
+    }
+    (results_dir / "q34_results.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False), encoding="utf-8"
+    )
+    return report
+
+
 def run_full(project_root: Path) -> dict[str, Any]:
     data = load_inputs(project_root)
     results_dir = project_root / "results"
@@ -2128,8 +2399,20 @@ def run_full(project_root: Path) -> dict[str, Any]:
     pd.DataFrame(q1_rows).to_csv(results_dir / "q1_batches.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(safe_rows).to_csv(results_dir / "q1_safe_payload.csv", index=False, encoding="utf-8-sig")
 
-    q2_specs = _build_q2_specs(data, q1_by_service)
-    q2_trips, deliveries = _schedule_q2(data, q2_specs)
+    baseline_specs = _build_q2_specs(data, q1_by_service)
+    baseline_trips, baseline_deliveries = _schedule_q2(data, baseline_specs)
+    indexed_boxes = boxes.set_index("货箱编号", drop=False)
+    hard_assignments: dict[str, str] = {}
+    for trip in baseline_trips:
+        trip_rows = indexed_boxes.loc[trip["box_ids"]]
+        if bool(trip_rows.apply(box_deadline, axis=1).notna().all()):
+            hard_assignments[str(trip["route"][0])] = str(trip["unit_id"])
+    mixed_specs = _build_q2_specs(data, q1_by_service, hard_assignments)
+    mixed_trips, mixed_deliveries = _schedule_q2(data, mixed_specs)
+    if _q2_score(mixed_trips, mixed_deliveries) < _q2_score(baseline_trips, baseline_deliveries):
+        q2_trips, deliveries, q2_variant = mixed_trips, mixed_deliveries, "mixed_hard_soft"
+    else:
+        q2_trips, deliveries, q2_variant = baseline_trips, baseline_deliveries, "hard_only_baseline"
     q2_trip_rows = [
         {k: v for k, v in trip.items() if k not in ("leg_records", "service_records")}
         for trip in q2_trips
@@ -2182,7 +2465,10 @@ def run_full(project_root: Path) -> dict[str, Any]:
         "input_hashes": data["input_hashes"],
         "q1": {"trip_count": len(q1_rows), "energy_kwh": sum(x["energy_kwh"] for x in q1_rows),
                "duration_s": sum(x["duration_s"] for x in q1_rows), "safe_payload_rows": len(safe_rows)},
-        "q2": {"trip_count": len(q2_trips), "hard_late_count": len(hard_late),
+        "q2": {"variant": q2_variant,
+               "baseline_score": list(_q2_score(baseline_trips, baseline_deliveries)),
+               "selected_score": list(_q2_score(q2_trips, deliveries)),
+               "trip_count": len(q2_trips), "hard_late_count": len(hard_late),
                "makespan_s": max(x["return_s"] for x in q2_trips),
                "energy_kwh": sum(x["energy_kwh"] for x in q2_trips),
                "wtd": sum(x["priority"] * x["tardiness_s"] / x["expected_s"]
@@ -2209,7 +2495,7 @@ def run_full(project_root: Path) -> dict[str, Any]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="2026 华为杯 D 题求解")
-    parser.add_argument("--mode", choices=["slice", "full"], default="slice")
+    parser.add_argument("--mode", choices=["slice", "q2", "q34", "full"], default="slice")
     parser.add_argument("--project-root", type=Path, default=Path(__file__).resolve().parent)
     return parser.parse_args()
 
@@ -2221,6 +2507,16 @@ def main() -> int:
         report = run_slice(project_root)
         status = "PASS" if all(report["sanity"].values()) else "FAIL"
         print(json.dumps({"status": status, "sanity": report["sanity"], "q1": report["q1"], "q2": report["q2"]["effective_deadlines_s"], "q3": report["q3"]["continuous_check"]}, ensure_ascii=False, indent=2))
+        return 0 if all(report["sanity"].values()) else 2
+    if args.mode == "q2":
+        report = run_q2_revision(project_root)
+        status = "PASS" if all(report["sanity"].values()) else "FAIL"
+        print(json.dumps({"status": status, **report}, ensure_ascii=False, indent=2))
+        return 0 if all(report["sanity"].values()) else 2
+    if args.mode == "q34":
+        report = run_q34_revision(project_root)
+        status = "PASS" if all(report["sanity"].values()) else "FAIL"
+        print(json.dumps({"status": status, **report}, ensure_ascii=False, indent=2))
         return 0 if all(report["sanity"].values()) else 2
     report = run_full(project_root)
     status = "PASS" if all(report["sanity"].values()) else "FAIL"

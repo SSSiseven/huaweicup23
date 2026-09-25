@@ -1,0 +1,61 @@
+\section{问题四：固定联合方案下的任务分区与资源配置}
+\subsection{不可拆任务块与合法分区}
+问题四的输入是问题三已经确定的联合方案，不能通过重排访问顺序或移动任务时刻降低资源需求。以15个服务区为顶点，若某运输架次同时访问两个服务区，则在两顶点之间连边。同一连通分量内的服务区由共访关系直接或间接连接，必须作为不可拆的原子任务块。
+
+设原子块集合为$\mathcal A=\{A_1,\ldots,A_m\}$，将其划分为$K=2$或3个非空组。令$x_{jk}\in\{0,1\}$表示原子块$j$归属组$k$，则
+\begin{equation}
+\sum_{k=1}^{K}x_{jk}=1\quad(j=1,\ldots,m),\qquad
+\sum_{j=1}^{m}x_{jk}\ge1\quad(k=1,\ldots,K).
+\end{equation}
+若$m<K$，则该固定运输方案不支持要求的非空分区。原子块由实际路线决定，不能为了获得均衡地图而拆开共访服务区。
+
+\subsection{从实际通信分段确定中继归属}
+令$\mathcal R_k$为组$k$承担的运输架次集合，$\mathcal E$为问题三最终通信分段表中出现的“运输架次—中继架次”实际指派关系。该组所需中继任务为
+\begin{equation}
+\mathcal H_k=\{h:\exists r\in\mathcal R_k,\ (r,h)\in\mathcal E\}.
+\label{eq:actual-relay}
+\end{equation}
+一架中继在某波次内在位，不意味着它实际保障了波次中所有运输任务。必须从通信分段的实际指派提取$\mathcal E$，而不能把整个波次的运输架次清单直接作为保障关系。
+
+若同一中继任务属于多个$\mathcal H_k$，各相关组独立配置资源，并保留其完整悬停点和完整原任务时段。这样既保持题设任务安排不变，又避免把并未服务本组的中继任务错误计入本组。图\ref{fig:q4-flow}给出这一资源归属链。
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=8mm]
+\node[block,text width=5.2cm](route)at(0,0){固定运输路线\\建立服务区共访图};
+\node[block,text width=5.2cm](comm)at(6,0){最终通信分段\\提取实际运输—中继关系};
+\node[block,text width=5.2cm,below=of route](atom){共访连通分量\\形成不可拆原子块};
+\node[block,text width=5.2cm,below=of comm](relay){确定各组关联中继\\保留完整任务时段};
+\node[block,text width=11.5cm](peak)at(3,-3.4){枚举合法分区；按类型计算无人机、能源资源占用区间峰值};
+\node[block,text width=11.5cm,below=of peak](out){比较配置规模、相对集中执行的冗余、库存缺口与工作量均衡};
+\draw[edge](route)--(atom);\draw[edge](comm)--(relay);
+\draw[edge](atom)--(atom.south|-peak.north);\draw[edge](relay)--(relay.south|-peak.north);
+\draw[edge](peak)--(out);
+\end{tikzpicture}
+\caption{固定方案分区与资源核算流程；不代表已求得的具体服务区分组}\label{fig:q4-flow}
+\end{figure}
+
+\subsection{固定时序的最小独立资源数}
+对组$k$和资源类型$a$，设必须执行的占用区间集合为$\mathcal I_{ka}$。同型资源可互换、各任务时刻固定且没有额外资源专属约束时，最小配置数等于区间峰值并发数：
+\begin{equation}n_{ka}=\max_t\sum_{I\in\mathcal I_{ka}}\ind_I(t).\label{eq:peak}\end{equation}
+原因是任何同时占用的区间都必须使用不同实体；反过来，按开始时刻排序、结束后回收资源的贪心分配可用峰值数量完成所有区间。
+
+对运输机按机型分别统计任务区间，对运输电池计入任务后的完整充电；对中继机计入周转，对能源组件计入充电。所有区间采用左闭右开约定，同一时刻结束事件优先于开始事件处理。若未来增加资源专属兼容性、共享充电工位或不同初始SOC，峰值数量不再自动构成充分条件，应扩展资源模型。
+
+\subsection{库存缺口、冗余与组间均衡}
+设$I_a$为全局库存，$n_a^{central}$为同一有效联合方案集中执行所需的资源，则
+\begin{equation}
+D_a^{(K)}=\max\left(0,\sum_kn_{ka}-I_a\right),\qquad
+R_a^{(K)}=\sum_kn_{ka}-n_a^{central}.\label{eq:shortage}
+\end{equation}
+前者描述资源采购或增援缺口，后者描述分区独立执行相对集中执行新增的配置。不能让每个组分别减去一份完整全局库存，也不能把“库存剩余”称为分区冗余。
+
+以组内运输机任务占用时长和中继机含周转的占用时长之和定义工作量$W_k$，不把能源充电时间再次计作无人机机时。均衡性采用总体标准差口径：
+\begin{equation}
+\bar W=\frac1K\sum_kW_k,\qquad
+CV_W=\frac{\sqrt{K^{-1}\sum_k(W_k-\bar W)^2}}{\bar W}.
+\end{equation}
+另以各组最后返航时刻之差评价完成时间均衡。两者回答不同问题：机时相近的组仍可能因等待或晚开始而较晚结束。
+
+\subsection{分区搜索与比较原则}
+按固定顺序逐一分配原子块，并以首次出现的组编号规范化消除标签对称。在每个合法分区上构造$\mathcal R_k$及$\mathcal H_k$，由式\eqref{eq:peak}计算资源向量，再比较缺口、总配置数量、$CV_W$和组间完成时刻极差。跨类型合计仅表示“件数优先”的一种建模偏好，不代表不同资源采购价格相同；同时应完整报告分类型向量，以免合计掩盖资源差异。
+
+在枚举完全部合法分区、且输入方案与资源关系正确的前提下，可以讨论固定问题三方案下的最优划分。本阶段尚不输出具体分区、资源最小值或缺口数值。后续结果图应同时给出分区地图与分类型资源表，以说明空间分组为何引起某类资源复制，而不是只展示颜色不同的区域。

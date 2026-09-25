@@ -1,0 +1,58 @@
+\section{问题一：单点往返运输能力与货箱组批}
+\subsection{分析思路与安全载荷边界}
+单点任务限定为O01到服务区再返回O01，去程载货、返程空载。其决策可以分成两层：先判断机型在该节点的能量允许载荷，再决定哪些完整货箱组成一个批次。前者是连续质量变量问题，后者是离散集合划分问题，不能用最大安全载荷直接除总需求代替组批。
+
+定义机型$g$服务节点$i$的往返能耗函数
+\begin{equation}
+F_{gi}(q)=E_{g,O01,i}(q)+E_{g,i,O01}(0),\qquad B_g=(1-\rho_g)E_g^{use}.
+\end{equation}
+在给定机型空载航程不小于满载航程、爬升效率为正时，$F_{gi}(q)$对$q$非减。因此最大安全载荷按以下边界处理：
+\begin{equation}
+q_{gi}^{safe}=\begin{cases}
+\text{不可达},&F_{gi}(0)>B_g,\\
+Q_g,&F_{gi}(Q_g)\le B_g,\\
+\sup\{q\in[0,Q_g]:F_{gi}(q)\le B_g\},&\text{其他情况}.
+\end{cases}\label{eq:safe-payload}
+\end{equation}
+最后一种情况可用二分求解，维护可行下界与不可行上界，直到区间宽度达到所需精度。空载不可达应单独标记，不能输出0 kg并把该机型保留为可行运输选择。即使安全载荷达到额定上限，实际组批仍可能首先受到体积约束。
+
+\subsection{可行子集与多指标代价}
+设$B_i$为服务区$i$的货箱集合。对每个非空子集$S\subseteq B_i$和机型$g$，计算总质量$w(S)$、总体积$v(S)$和往返能耗，保留满足
+\begin{equation}
+w(S)=\sum_{b\in S}w_b\le Q_g,\quad
+v(S)=\sum_{b\in S}v_b\le V_g,\quad F_{gi}(w(S))\le B_g
+\end{equation}
+的候选$(S,g)$。其作业时间包含准备、逐箱装载、往返飞行及投送交接：
+\begin{equation}
+T(S,g)=t_g^{prep}+|S|t_g^{load}+t_{g,O01,i}
++t_g^{base}+|S|t_g^{handover}+t_{g,i,O01}.
+\end{equation}
+本文优先减少架次数，以降低独立执行任务数；架次数相同时减少能耗，再比较累计作业时间。相应的候选代价向量为
+\begin{equation}c(S,g)=\bigl(1,F_{gi}(w(S)),T(S,g)\bigr).\end{equation}
+这是明确的字典序偏好，而不是把不同量纲的指标直接相加。若应急管理者更重视时间，可以改变优先顺序，但必须重新求解并报告由此产生的取舍。
+
+\subsection{集合划分动态规划}
+令$D(M)$为覆盖货箱子集$M$的最优代价向量，$D(\varnothing)=(0,0,0)$。从$M$中取编号最小的货箱$b_*(M)$，则递推为
+\begin{equation}
+D(M)=\lexmin_{\substack{(S,g)\text{可行},\ S\subseteq M\\b_*(M)\in S}}
+\{D(M\setminus S)+c(S,g)\}.\label{eq:dp}
+\end{equation}
+要求候选包含$b_*(M)$仅消除同一划分的排列重复，不删去合法划分。回溯递推选择即可获得每个批次的货箱集合与机型。各服务区分别求解，在问题一不设跨区资源耦合的条件下，将局部结果合并即得到全场景组批。
+
+图\ref{fig:q1-flow}概括求解流程。对节点拥有$n_i$箱的情况，子集枚举规模为$2^{n_i}$，朴素子集递推量级为$3^{n_i}$；适合逐服务区的小规模离散问题，但不宜把全部80箱合成一个位掩码问题。
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[node distance=8mm]
+\node[block,text width=11cm] (a) {节点坐标、经过像元的最高高程、机型参数、该区货箱};
+\node[block,text width=11cm,below=of a] (b) {空载/满载边界判定，必要时二分求最大安全载荷};
+\node[block,text width=11cm,below=of b] (c) {枚举子集与机型，筛选质量、体积和返航能量均可行的批次};
+\node[block,text width=11cm,below=of c] (d) {集合划分动态规划：架次数优先，其次能耗，再次作业时间};
+\node[block,text width=11cm,below=of d] (e) {回溯货箱与机型；复核逐箱覆盖、容量、能量与指标合计};
+\draw[edge](a)--(b);\draw[edge](b)--(c);\draw[edge](c)--(d);\draw[edge](d)--(e);
+\end{tikzpicture}
+\caption{单点运输能力与货箱组批求解流程}\label{fig:q1-flow}
+\end{figure}
+
+\subsection{结果的检验与解释口径}
+后续应按“15个节点乘3种机型”报告45项安全载荷，并对最终每个架次重新计算货箱质量、体积、往返能耗和作业时间。逐箱覆盖次数须恰为1，不允许遗漏、重复或跨区组批。安全载荷曲线与返航余量相联系，组批结果则用架次数、质量利用率和体积利用率解释。
+
+本节确立模型和求解步骤，不给出尚未完成地形复核后的载荷与架次数值。关于安全余量的敏感性，应在每个余量水平重新生成可行候选并运行动态规划，不能只调整旧解的能耗门限后继续沿用原批次。

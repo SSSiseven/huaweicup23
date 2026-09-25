@@ -1,0 +1,109 @@
+{
+  "box_count": 80,
+  "mass_kg": 758.0,
+  "volume_m3": 2.011,
+  "hard_count": 31,
+  "soft_count": 49,
+  "medical_count": 16,
+  "first_count": 30,
+  "overlap_count": 15,
+  "thresholds_db": {
+    "transport_gateway": 122.0,
+    "transport_relay": 116.0,
+    "relay_gateway": 126.0
+  },
+  "transport_types": {
+    "A": {
+      "type_id": "A",
+      "empty_mass_kg": 70.0,
+      "payload_kg": 25.0,
+      "volume_m3": 0.06,
+      "cruise_mps": 12.0,
+      "empty_range_m": 25000.0,
+      "full_range_m": 20000.0,
+      "energy_kwh": 4.5,
+      "reserve": 0.2,
+      "prep_s": 300.0,
+      "load_per_box_s": 30.0,
+      "base_handover_s": 150.0,
+      "handover_per_box_s": 30.0,
+      "climb_mps": 3.0,
+      "descent_mps": 2.5,
+      "climb_eff": 0.72
+    },
+    "B": {
+      "type_id": "B",
+      "empty_mass_kg": 65.0,
+      "payload_kg": 30.0,
+      "volume_m3": 0.073,
+      "cruise_mps": 15.0,
+      "empty_range_m": 28000.0,
+      "full_range_m": 16000.0,
+      "energy_kwh": 4.0,
+      "reserve": 0.2,
+      "prep_s": 300.0,
+      "load_per_box_s": 30.0,
+      "base_handover_s": 150.0,
+      "handover_per_box_s": 30.0,
+      "climb_mps": 3.0,
+      "descent_mps": 2.5,
+      "climb_eff": 0.72
+    },
+    "C": {
+      "type_id": "C",
+      "empty_mass_kg": 69.9,
+      "payload_kg": 80.0,
+      "volume_m3": 0.25,
+      "cruise_mps": 15.0,
+      "empty_range_m": 26000.0,
+      "full_range_m": 12000.0,
+      "energy_kwh": 8.0,
+      "reserve": 0.2,
+      "prep_s": 300.0,
+      "load_per_box_s": 30.0,
+      "base_handover_s": 180.0,
+      "handover_per_box_s": 36.0,
+      "climb_mps": 2.5,
+      "descent_mps": 2.0,
+      "climb_eff": 0.72
+    }
+  },
+  "inventory": {
+    "A": {
+      "count": 6,
+      "full_charge_s": 1800.0
+    },
+    "B": {
+      "count": 4,
+      "full_charge_s": 2400.0
+    },
+    "C": {
+      "count": 4,
+      "full_charge_s": 3000.0
+    }
+  },
+  "relay": {
+    "mass_kg": 23.5,
+    "cruise_mps": 15.0,
+    "cruise_kw": 1.15,
+    "energy_kwh": 3.2,
+    "reserve": 0.2,
+    "prep_s": 180.0,
+    "link_s": 30.0,
+    "turnaround_s": 300.0,
+    "climb_mps": 4.0,
+    "descent_mps": 3.0,
+    "climb_eff": 0.72,
+    "hover_kw": 1.05,
+    "comm_kw": 0.05,
+    "max_agl_m": 300.0
+  },
+  "input_hashes": {
+    "D题\\数据\\无人机应急物资运输基础数据\\调度中心与服务区.xlsx": "541A7AF1DED08C9A3FF448480332CB5F6A54902F0AFA6E9BCD50C1D2B2B34E38",
+    "D题\\数据\\无人机应急物资运输基础数据\\物资需求与配送时限.xlsx": "5A3346159CEDDCF585859D270B8F62114B388A1F737FBE64FFDE0EE1FDC8170A",
+    "D题\\数据\\无人机应急物资运输基础数据\\运输无人机数据.xlsx": "9296A657C07E042AFBA6AEEA7999665D9CD24E00B592FD6C269DE6E338480DCB",
+    "D题\\数据\\无人机应急物资运输基础数据\\中继无人机数据.xlsx": "BE52643FF29419233E6A141DCA03A04160A8AF551CAB36D8C49B51BB836BEA04",
+    "D题\\数据\\无人机应急物资运输基础数据\\通信链路参数.xlsx": "1860D153199E7AE460BA36E83B673374E640E19DE91EA167F2877271001F5F81",
+    "D题\\数据\\镇龙乡地理空间数据\\镇龙乡及周边地理数据\\数字高程模型数据（DEM）\\镇龙乡及周边30米DEM.tif": "741FE6DE0B2BCAFFD0F4007F574EE698D46197094F52CC954B532C4F90FC7C03"
+  }
+}
