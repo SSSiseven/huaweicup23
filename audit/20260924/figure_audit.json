@@ -1,0 +1,157 @@
+{
+  "ok": true,
+  "directory": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\figures",
+  "questions": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+  ],
+  "files": {
+    "process_q1_reserve_sensitivity.png": {
+      "width_px": 1890,
+      "height_px": 1560,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 6.300012600025201,
+      "height_in": 5.2000104000208
+    },
+    "process_q1_reserve_sensitivity.svg": {
+      "text_count": 26,
+      "embedded_raster": false
+    },
+    "process_q2_uav_gantt.png": {
+      "width_px": 2160,
+      "height_px": 1350,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 7.200014400028801,
+      "height_in": 4.500009000018
+    },
+    "process_q2_uav_gantt.svg": {
+      "text_count": 22,
+      "embedded_raster": false
+    },
+    "process_q3_relay_gantt.png": {
+      "width_px": 2160,
+      "height_px": 1260,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 7.200014400028801,
+      "height_in": 4.2000084000168005
+    },
+    "process_q3_relay_gantt.svg": {
+      "text_count": 26,
+      "embedded_raster": false
+    },
+    "process_q4_resource_tradeoff.png": {
+      "width_px": 2460,
+      "height_px": 1350,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 8.200016400032801,
+      "height_in": 4.500009000018
+    },
+    "process_q4_resource_tradeoff.svg": {
+      "text_count": 33,
+      "embedded_raster": false
+    },
+    "raw_q1_distance_demand.png": {
+      "width_px": 1890,
+      "height_px": 1200,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 6.300012600025201,
+      "height_in": 4.000008000016
+    },
+    "raw_q1_distance_demand.svg": {
+      "text_count": 33,
+      "embedded_raster": false
+    },
+    "raw_q2_deadline_priority.png": {
+      "width_px": 1890,
+      "height_px": 1200,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 6.300012600025201,
+      "height_in": 4.000008000016
+    },
+    "raw_q2_deadline_priority.svg": {
+      "text_count": 23,
+      "embedded_raster": false
+    },
+    "raw_q3_relay_phase_duration.png": {
+      "width_px": 2100,
+      "height_px": 1320,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 7.000014000028001,
+      "height_in": 4.4000088000176
+    },
+    "raw_q3_relay_phase_duration.svg": {
+      "text_count": 25,
+      "embedded_raster": false
+    },
+    "raw_q4_atomic_components.png": {
+      "width_px": 1890,
+      "height_px": 1440,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 6.300012600025201,
+      "height_in": 4.800009600019201
+    },
+    "raw_q4_atomic_components.svg": {
+      "text_count": 33,
+      "embedded_raster": false
+    },
+    "result_q1_batch_utilization.png": {
+      "width_px": 1800,
+      "height_px": 1410,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 6.000012000024,
+      "height_in": 4.7000094000188
+    },
+    "result_q1_batch_utilization.svg": {
+      "text_count": 20,
+      "embedded_raster": false
+    },
+    "result_q2_delivery_deadlines.png": {
+      "width_px": 1740,
+      "height_px": 1500,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 5.8000116000232005,
+      "height_in": 5.0000100000200005
+    },
+    "result_q2_delivery_deadlines.svg": {
+      "text_count": 18,
+      "embedded_raster": false
+    },
+    "result_q3_communication_timeline.png": {
+      "width_px": 2400,
+      "height_px": 1800,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 8.000016000032,
+      "height_in": 6.000012000024
+    },
+    "result_q3_communication_timeline.svg": {
+      "text_count": 40,
+      "embedded_raster": false
+    },
+    "result_q4_partition_map.png": {
+      "width_px": 2760,
+      "height_px": 1320,
+      "dpi_x": 299.9994,
+      "dpi_y": 299.9994,
+      "width_in": 9.2000184000368,
+      "height_in": 4.4000088000176
+    },
+    "result_q4_partition_map.svg": {
+      "text_count": 61,
+      "embedded_raster": false
+    }
+  },
+  "issues": []
+}

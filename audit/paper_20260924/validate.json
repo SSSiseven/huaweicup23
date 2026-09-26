@@ -1,0 +1,98 @@
+{
+  "main_tex": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper\\main.tex",
+  "project_root": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper",
+  "pdf_path": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\阶段性论文初稿.pdf",
+  "source_sha256": "76cf731c51ed22fff99ce1c22364e8d2c212dbbc486378adfbe505fe12d3eaf9",
+  "rendered_pages": 18,
+  "body_pages": null,
+  "page_limit_scope": "total",
+  "pdf_audit": {
+    "pages": 18,
+    "blank_pages": [],
+    "page_sizes_pt": [
+      [
+        595.3,
+        841.9
+      ]
+    ],
+    "unembedded_fonts": [],
+    "raster_images": 0,
+    "min_image_dpi": null,
+    "issues": []
+  },
+  "build_manifest": {
+    "schema_version": 1,
+    "created_at": "2026-09-24T07:19:06.442993+00:00",
+    "passed": true,
+    "main_tex": "main.tex",
+    "project_root": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper",
+    "source_sha256": "76cf731c51ed22fff99ce1c22364e8d2c212dbbc486378adfbe505fe12d3eaf9",
+    "compiled_source_sha256": "76cf731c51ed22fff99ce1c22364e8d2c212dbbc486378adfbe505fe12d3eaf9",
+    "post_build_source_sha256": "76cf731c51ed22fff99ce1c22364e8d2c212dbbc486378adfbe505fe12d3eaf9",
+    "pdf_sha256": "5c0e51babeeb55ad7d44510a8d81b33ca65d430557249c68ea95a3d6ff485462",
+    "project_manifest_sha256": "a9755f1e3c742a3c82b27e47947ba3cc193ab3bbef9c952df8ed34ca6212a926",
+    "engine": "xelatex",
+    "tools": {
+      "latexmk": {
+        "path": "D:\\texlive\\2026\\bin\\windows\\latexmk.EXE",
+        "version": "perl: warning: Setting locale failed."
+      },
+      "xelatex": {
+        "path": "D:\\texlive\\2026\\bin\\windows\\xelatex.EXE",
+        "version": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)"
+      }
+    },
+    "commands": [
+      {
+        "command": [
+          "D:\\texlive\\2026\\bin\\windows\\latexmk.EXE",
+          "-norc",
+          "-gg",
+          "-xelatex",
+          "-e",
+          "$xelatex = 'xelatex -no-shell-escape %O %S'",
+          "-interaction=nonstopmode",
+          "-halt-on-error",
+          "-file-line-error",
+          "-outdir=build",
+          "main.tex"
+        ],
+        "cwd": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper",
+        "returncode": 0,
+        "duration_seconds": 23.891
+      }
+    ],
+    "warnings": [],
+    "allowed_warnings": [],
+    "warning_override": {
+      "patterns": [],
+      "reason": null
+    },
+    "issues": [],
+    "reproduce": "C:\\Users\\陈三岁\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe C:\\Users\\陈三岁\\.codex\\skills\\math-modeling\\tools\\latex\\scripts\\latex_paper.py build D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper\\main.tex --engine xelatex --timeout 180 --publish D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\阶段性论文初稿.pdf --overwrite"
+  },
+  "thresholds": {
+    "min_content_units": 5000,
+    "min_pages": 1,
+    "min_equations": 20,
+    "min_figures": 8,
+    "min_tables": 5
+  },
+  "threshold_overrides": [],
+  "metrics": {
+    "content_units": 12110,
+    "equations": 36,
+    "figures": 8,
+    "tables": 6,
+    "citations": 2,
+    "source_files": 14,
+    "question_figure_coverage": {
+      "q1": true,
+      "q2": true,
+      "q3": true,
+      "q4": true
+    }
+  },
+  "issues": [],
+  "passed": true
+}

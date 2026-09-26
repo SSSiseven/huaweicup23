@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "contest": "cumcm",
+  "main_tex": "main.tex",
+  "template": {
+    "path": "C:\\Users\\陈三岁\\.codex\\skills\\math-modeling\\tools\\latex\\assets\\templates\\cumcm",
+    "source": null,
+    "version": null,
+    "sha256": "beffdfb2062dbc72f3d6050691ec9a3816d8f91fd85840720ddd8ec757a3ae61"
+  },
+  "template_files": {
+    "main.tex": "d606c76d66e26729d352fc81eae25c82850a5f5633c46167f626db402c7ae91b",
+    "references.bib": "c85fa9f8c7cdb3b0c8c2f394bebd7624f6ff5abdd6bac5b4f43b58e67ee7c222"
+  },
+  "resource_bindings": [
+    {
+      "source": "audit/paper_20260924/assets",
+      "destination": "figures/data",
+      "sha256": "2384ec5504bf4f2debdd6f12991b058e40054ad608153b85cc7645d8dad66f46",
+      "hash_mode": "tree",
+      "bound_at": "2026-09-24T03:58:28.007538+00:00"
+    },
+    {
+      "source": "audit/paper_20260924/paper_README.md",
+      "destination": "README.md",
+      "sha256": "6f8f58dfc1b8ed7ea795456bfd2994a70d5890da90d36d166d000128309c3b58",
+      "hash_mode": "content",
+      "bound_at": "2026-09-24T07:18:41.095767+00:00"
+    }
+  ],
+  "created_at": "2026-09-24T03:42:46.309442+00:00"
+}

@@ -1,0 +1,75 @@
+\section{问题二：异构无人机多点多架次运输调度}
+\subsection{决策表示与硬软时限}
+将运输架次$r$表示为机型$g_r$、访问序列$\pi_r$、货箱集合$B_r$、实体机$u_r$、共享电池$k_r$及准备开始时刻$s_r$。每个货箱必须恰属于一个架次，并在自身目的服务区交付；机型与实体机、电池类型必须匹配。
+
+对医疗箱和首批保障箱定义适用截止集合$\mathcal D_b$：医疗箱加入期望时刻，首批箱加入首批截止。硬时限箱满足
+\begin{equation}d_b^{hard}=\min\mathcal D_b,\qquad C_b\le d_b^{hard}.\end{equation}
+对$\mathcal D_b=\varnothing$的软时限箱，仅在目标中评价归一化加权迟到：
+\begin{equation}
+WTD=\sum_{b\in B^{soft}}\alpha_b\frac{\max(0,C_b-d_b^{exp})}{d_b^{exp}}.\label{eq:wtd}
+\end{equation}
+这里的“送达”采用完成该箱交接的时刻$C_b$，并非无人机到达服务区的时刻。这样的区分在同站多箱交接时会影响临界货箱是否逾期。
+
+\subsection{逐站时刻与剩余载荷递推}
+令$\pi_r=(i_1,\ldots,i_m)$，$i_0=O01$，起飞时刻为
+\begin{equation}\tau_{r0}^{dep}=s_r+t_{g_r}^{prep}+|B_r|t_{g_r}^{load}.\end{equation}
+到达第$j$个服务区、完成站内投送和离开的时刻依次为
+\begin{align}
+\tau_{rj}^{arr}&=\tau_{r,j-1}^{dep}+t_{g_r,i_{j-1},i_j},\\
+C_b&=\tau_{rj}^{arr}+t_{g_r}^{base}+\ell_b t_{g_r}^{handover},\\
+\tau_{rj}^{dep}&=\tau_{rj}^{arr}+t_{g_r}^{base}+|B_{ri_j}|t_{g_r}^{handover}.
+\end{align}
+其中$\ell_b$为货箱在该站的交接序号。按有效硬截止升序、应急优先系数降序、编号升序排列，软时限箱在硬时限箱后依上述规则交接。离站后扣除本次交付质量，再用新的剩余载荷计算下一航段能耗。末站离开后加返航时间，得到$\tau_r^{ret}$。
+
+这一递推把访问顺序同时作用于时间和能耗：较早卸下重箱可减轻后续载荷，但可能推迟其他节点的硬时限箱。多点路线必须逐段重算，不能仅在两个单点能耗之间做距离修正。
+
+\subsection{实体机与电池的双资源约束}
+运输实体机在半开区间$[s_r,\tau_r^{ret})$被占用；电池还需完成返航后的充电，因此其占用区间为
+\begin{equation}I_r^{bat}=[s_r,\tau_r^{ret}+T^{chg}(SOC_r^{end})).\end{equation}
+对每个实体机$u$和电池$k$，同一时刻分别满足
+\begin{equation}
+\sum_{r:u_r=u}\ind_{[s_r,\tau_r^{ret})}(t)\le1,\qquad
+\sum_{r:k_r=k}\ind_{I_r^{bat}}(t)\le1.
+\end{equation}
+半开区间使“上一任务结束的瞬间开始下一任务”不会被重复计为冲突。题面未另给运输机周转时长，实体机返回后可开始准备；其原电池仍在充电时，可以换用已经满电的同型电池。
+
+图\ref{fig:q2-resource}用符号时刻说明两类资源的差异。机体可再次执行并不意味着原电池可再次使用；这也是仅按无人机架数排列甘特图不足以检验资源可行性的原因。
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[x=.8cm,y=1cm,font=\small]
+\draw[edge](0,0)--(13,0) node[right]{时间};
+\node[anchor=east] at(0,1.2){实体机};\node[anchor=east]at(0,2.3){电池};
+\filldraw[fill=blue!12,draw=blue!50] (1,.8) rectangle (7,1.6);
+\node at(4,1.2){准备、飞行、交付与返航};
+\filldraw[fill=blue!12,draw=blue!50] (1,1.9) rectangle (7,2.7);
+\filldraw[fill=orange!15,draw=orange!60] (7,1.9) rectangle (12,2.7);
+\node at(4,2.3){执行任务};\node at(9.5,2.3){返航后充电};
+\foreach \x in {1,7,12}{\draw[dashed,gray](\x,0)--(\x,2.8);}
+\node[below]at(1,0){$s_r$};\node[below]at(7,0){$\tau_r^{ret}$};
+\node[below]at(12,0){$\tau_r^{ret}+T^{chg}$};
+\end{tikzpicture}
+\caption{运输机与共享电池占用差异示意；横向长度不代表实际计算时长}\label{fig:q2-resource}
+\end{figure}
+
+\subsection{求解流程与指标权衡}
+在全部硬约束成立的集合内，以$(WTD,C_{max},E_T,N_T)$作为分层比较指标，其中
+\begin{equation}C_{max}=\max_r\tau_r^{ret},\quad E_T=\sum_rE_r,\quad N_T=|\mathcal R|.\end{equation}
+先保证医疗与首批交付，再比较一般物资及时性；在及时性相同的候选中依次减少完工时间、能耗和架次数。该目标定义评价偏好，并不意味着构造算法已经穷尽其可行集合。
+
+求解先用硬时限箱构造零违约基线并确定紧迫批次的实体机指派，随后枚举同一服务区普通货箱的补入组合。补入后的架次必须重新核验质量、体积、逐段递减载荷能耗、返航余量及每个硬时限，并保持硬时限箱优先交接。剩余货箱再执行单服务区精确组批和两服务区串访配对，最后由事件仿真器统一重排实体机与满电电池。算法同时保留硬箱专送基线，只有混装方案按$(N_{late}^{hard},WTD,C_{max},E_T,N_T)$字典序严格改进时才采用。
+
+基于修正后的DEM穿越像元高程口径，表~\ref{tab:q2-compare}给出两套构造方案的实算比较。两者均完成80箱唯一交付，31箱硬时限货箱均无违约；混装方案把普通物资超期箱数由23箱降至9箱，并同时减少架次、完成时间和能耗，故选作问题二当前方案。
+\begin{table}[htbp]
+  \centering
+  \caption{问题二基线与硬软混装方案比较}
+  \label{tab:q2-compare}
+  \begin{tabular}{lrrrrrr}
+    \toprule
+    方案 & 硬违约/箱 & 普通超期/箱 & $WTD$ & $C_{max}$/h & $E_T$/kWh & 架次 \\
+    \midrule
+    硬箱专送基线 & 0 & 23 & 111.492 & 3.527 & 83.012 & 26 \\
+    硬软混装方案 & 0 & 9 & 38.787 & 2.679 & 69.602 & 22 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+相对基线，混装方案的$WTD$下降65.2\%，全部返航完成时间缩短24.1\%，总运输能耗下降16.2\%，架次下降15.4\%。这些指标来自确定性可行构造，不据此声称全局最优；逐架次路线、逐箱完成时刻以及无人机和电池编号分别记录在结果表中。

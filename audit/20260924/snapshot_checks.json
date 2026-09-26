@@ -1,0 +1,231 @@
+{
+  "scope": "Frozen files and arithmetic/resource checks, not a full communication proof or optimization rerun",
+  "python": "3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]",
+  "dependencies": {
+    "numpy": "1.26.2",
+    "pandas": "2.2.3",
+    "Pillow": "9.2.0",
+    "openpyxl": "3.1.2",
+    "matplotlib": "3.9.2"
+  },
+  "manifest": {
+    "input_files": {
+      "count": 7,
+      "matched": 7,
+      "mismatches": []
+    },
+    "source_files": {
+      "count": 6,
+      "matched": 0,
+      "mismatches": [
+        {
+          "path": "solve_d.py",
+          "match": false,
+          "matches_after_lf_normalization": true,
+          "expected": "292058A71C8F0D421DE1D1DB9B9B4E8D3933C5E82CA68E285031A773A277B231",
+          "actual": "748D531261194C0FE2EFDEF8B9CD87F9CA0DDB0E48F7E82753E2812447D517CA"
+        },
+        {
+          "path": "sensitivity_analysis.py",
+          "match": false,
+          "matches_after_lf_normalization": true,
+          "expected": "73022705274BA763BB073A30D7DD198659497C6A348D729F35F283F87638B244",
+          "actual": "789AD8CDAF3127981512157434F4CDD971576206BB523F3222CD6108BC5C868F"
+        },
+        {
+          "path": "make_figures.py",
+          "match": false,
+          "matches_after_lf_normalization": true,
+          "expected": "91460CFF1789E5F827B1C0C591C5A78CF13725145450F474520B2F6D48C3BC83",
+          "actual": "7CF2F376DFAB798CDF558E50823D85DAC2108F1564BB29CC12385E5C20111F3C"
+        },
+        {
+          "path": "export_submission.py",
+          "match": false,
+          "matches_after_lf_normalization": true,
+          "expected": "033DD79AF82FBADA28B52279E11BA2E6EF97FFC37D3C0780577594708378F2C0",
+          "actual": "A380CBF08454D7C9BDFAB420AA7B4A7FE7567F4CE05076B5B862A98BBF38BA35"
+        },
+        {
+          "path": "reproduce.py",
+          "match": false,
+          "matches_after_lf_normalization": true,
+          "expected": "7B9979C5FF578B8B384616BD2EE07758DDA9FE480E6818734C436EF8573BBC48",
+          "actual": "A34D5FB7848337E406355F5F5B986963AEEDA88AB05A1B25CD13F1C5BD5CCCD6"
+        },
+        {
+          "path": "requirements-lock.txt",
+          "match": false,
+          "matches_after_lf_normalization": true,
+          "expected": "AA2BBBEB4B9865AE630460EF4480273057B76A51582B4CDC1013EB6005A7B47D",
+          "actual": "4BA2648ED64506734E3BFC62BC658F53033D888DDD648539EA932FC8BC002544"
+        }
+      ]
+    },
+    "output_files": {
+      "count": 52,
+      "matched": 52,
+      "mismatches": []
+    }
+  },
+  "inputs": {
+    "nodes": 16,
+    "boxes": 80,
+    "summary_rows": 53
+  },
+  "stored_result_checks": {
+    "q1": {
+      "trips": 18,
+      "box_coverage_exact": true,
+      "energy_kwh": 59.231986413971605,
+      "minimum_return_soc": 0.2278926734902366,
+      "errors": []
+    },
+    "q2": {
+      "trips": 26,
+      "box_coverage_exact": true,
+      "energy_kwh": 83.0013302130449,
+      "minimum_return_soc": 0.2102812020019689,
+      "errors": [],
+      "delivery_coverage_exact": true,
+      "hard_boxes": 31,
+      "hard_late_recomputed": 0,
+      "minimum_hard_slack_s": 2375.0859312114962,
+      "return_max_s": 12695.763193631044,
+      "resource_conflicts": []
+    },
+    "q3": {
+      "trips": 26,
+      "box_coverage_exact": true,
+      "energy_kwh": 83.0013302130449,
+      "minimum_return_soc": 0.2102812020019689,
+      "errors": [],
+      "delivery_coverage_exact": true,
+      "hard_boxes": 31,
+      "hard_late_recomputed": 0,
+      "minimum_hard_slack_s": 2014.9113674428015,
+      "return_max_s": 23918.718635601468,
+      "resource_conflicts": []
+    },
+    "relay": {
+      "missions": 13,
+      "resource_conflicts": [],
+      "units_used": 2,
+      "packs_used": 5,
+      "minimum_return_soc": 0.403361790571607,
+      "return_max_s": 24472.376375029344
+    },
+    "q4": {
+      "shortfall_formula": true,
+      "redundancy_formula": true
+    }
+  },
+  "workbook": {
+    "Q1_单点组批": {
+      "nonempty_data_rows": 18,
+      "headers": [
+        "架次编号",
+        "服务区编号",
+        "机型编号",
+        "货箱编号列表",
+        "总质量（kg）",
+        "总体积（m³）",
+        "往返时间（s）",
+        "架次能耗（kWh）",
+        "返航SOC（%）"
+      ]
+    },
+    "Q2_运输架次": {
+      "nonempty_data_rows": 26,
+      "headers": [
+        "架次编号",
+        "无人机编号",
+        "机型编号",
+        "电池编号",
+        "开始时刻（s）",
+        "访问服务区顺序",
+        "返回O01时刻（s）",
+        "架次能耗（kWh）"
+      ]
+    },
+    "Q2_逐箱交付": {
+      "nonempty_data_rows": 80,
+      "headers": [
+        "货箱编号",
+        "架次编号",
+        "服务区编号",
+        "交付完成时刻（s）"
+      ]
+    },
+    "Q3_中继架次": {
+      "nonempty_data_rows": 13,
+      "headers": [
+        "中继架次编号",
+        "中继无人机编号",
+        "能源组件编号",
+        "开始时刻（s）",
+        "悬停经度（°）",
+        "悬停纬度（°）",
+        "悬停海拔（m）",
+        "建链完成时刻（s）",
+        "服务结束时刻（s）",
+        "返回O01时刻（s）",
+        "架次能耗（kWh）",
+        null,
+        null,
+        null
+      ]
+    },
+    "Q3_通信保障": {
+      "nonempty_data_rows": 89,
+      "headers": [
+        "运输架次编号",
+        "通信阶段",
+        "开始时刻（s）",
+        "结束时刻（s）",
+        "保障方式",
+        "中继架次编号",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "Q4_分区配置": {
+      "nonempty_data_rows": 5,
+      "headers": [
+        "K（2或3）",
+        "任务组编号",
+        "服务区列表",
+        "A型运输无人机数",
+        "B型运输无人机数",
+        "C型运输无人机数",
+        "A型电池组数",
+        "B型电池组数",
+        "C型电池组数",
+        "中继无人机数",
+        "中继能源组件数",
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
+  "flowcharts": [],
+  "paper_at_root": []
+}

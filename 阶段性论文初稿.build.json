@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-24T16:18:12.735995+00:00",
+  "passed": true,
+  "main_tex": "main.tex",
+  "project_root": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper",
+  "source_sha256": "7b39b6aca7f28d0044be12bf4995ee1809a072bbd41a647624f02b7bba22653c",
+  "compiled_source_sha256": "7b39b6aca7f28d0044be12bf4995ee1809a072bbd41a647624f02b7bba22653c",
+  "post_build_source_sha256": "7b39b6aca7f28d0044be12bf4995ee1809a072bbd41a647624f02b7bba22653c",
+  "pdf_sha256": "d9cfa5b2f9bdb8ce2c05f593b045fa25f9daed458c8651bd33ac8e25f1f9cc2d",
+  "project_manifest_sha256": "a9755f1e3c742a3c82b27e47947ba3cc193ab3bbef9c952df8ed34ca6212a926",
+  "engine": "xelatex",
+  "tools": {
+    "latexmk": {
+      "path": "D:\\texlive\\2026\\bin\\windows\\latexmk.EXE",
+      "version": "perl: warning: Setting locale failed."
+    },
+    "xelatex": {
+      "path": "D:\\texlive\\2026\\bin\\windows\\xelatex.EXE",
+      "version": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)"
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "D:\\texlive\\2026\\bin\\windows\\latexmk.EXE",
+        "-norc",
+        "-gg",
+        "-xelatex",
+        "-e",
+        "$xelatex = 'xelatex -no-shell-escape %O %S'",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-outdir=build",
+        "main.tex"
+      ],
+      "cwd": "D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper",
+      "returncode": 0,
+      "duration_seconds": 10.703
+    }
+  ],
+  "warnings": [],
+  "allowed_warnings": [],
+  "warning_override": {
+    "patterns": [],
+    "reason": null
+  },
+  "issues": [],
+  "reproduce": "D:\\program\\python\\python.exe C:\\Users\\陈三岁\\.codex\\skills\\math-modeling\\tools\\latex\\scripts\\latex_paper.py build D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\paper\\main.tex --engine xelatex --timeout 180 --publish D:\\Study\\陈文云\\研究生\\双创部门\\竞赛\\数模\\huaweicup23\\阶段性论文初稿.pdf --overwrite"
+}

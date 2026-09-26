@@ -1,0 +1,381 @@
+{
+  "scope": "Current nearest-grid semantics and frozen partition only; no new optimum claimed",
+  "node_pairs_checked": 120,
+  "dem_underestimates": [
+    {
+      "from": "O01",
+      "to": "S007",
+      "sampled_max_m": 451.8304748535156,
+      "traversed_cell_max_m": 461.9731750488281,
+      "underestimate_m": 10.1427001953125
+    },
+    {
+      "from": "O01",
+      "to": "S011",
+      "sampled_max_m": 243.34902954101562,
+      "traversed_cell_max_m": 245.36175537109375,
+      "underestimate_m": 2.012725830078125
+    },
+    {
+      "from": "S001",
+      "to": "S014",
+      "sampled_max_m": 542.6727294921875,
+      "traversed_cell_max_m": 550.0504150390625,
+      "underestimate_m": 7.377685546875
+    },
+    {
+      "from": "S003",
+      "to": "S015",
+      "sampled_max_m": 437.5785217285156,
+      "traversed_cell_max_m": 437.89886474609375,
+      "underestimate_m": 0.320343017578125
+    },
+    {
+      "from": "S004",
+      "to": "S005",
+      "sampled_max_m": 313.630615234375,
+      "traversed_cell_max_m": 315.80657958984375,
+      "underestimate_m": 2.17596435546875
+    },
+    {
+      "from": "S004",
+      "to": "S014",
+      "sampled_max_m": 502.7727966308594,
+      "traversed_cell_max_m": 505.3861083984375,
+      "underestimate_m": 2.613311767578125
+    },
+    {
+      "from": "S005",
+      "to": "S006",
+      "sampled_max_m": 358.161376953125,
+      "traversed_cell_max_m": 366.7322998046875,
+      "underestimate_m": 8.5709228515625
+    },
+    {
+      "from": "S005",
+      "to": "S007",
+      "sampled_max_m": 457.0865478515625,
+      "traversed_cell_max_m": 467.1478271484375,
+      "underestimate_m": 10.061279296875
+    },
+    {
+      "from": "S007",
+      "to": "S011",
+      "sampled_max_m": 387.9908752441406,
+      "traversed_cell_max_m": 389.17535400390625,
+      "underestimate_m": 1.184478759765625
+    },
+    {
+      "from": "S008",
+      "to": "S009",
+      "sampled_max_m": 333.9327697753906,
+      "traversed_cell_max_m": 338.620361328125,
+      "underestimate_m": 4.687591552734375
+    },
+    {
+      "from": "S008",
+      "to": "S015",
+      "sampled_max_m": 659.7728271484375,
+      "traversed_cell_max_m": 660.450927734375,
+      "underestimate_m": 0.6781005859375
+    },
+    {
+      "from": "S010",
+      "to": "S011",
+      "sampled_max_m": 385.9914245605469,
+      "traversed_cell_max_m": 387.0433349609375,
+      "underestimate_m": 1.051910400390625
+    },
+    {
+      "from": "S011",
+      "to": "S012",
+      "sampled_max_m": 367.3367004394531,
+      "traversed_cell_max_m": 370.4505615234375,
+      "underestimate_m": 3.113861083984375
+    },
+    {
+      "from": "S011",
+      "to": "S015",
+      "sampled_max_m": 538.2222290039062,
+      "traversed_cell_max_m": 538.7306518554688,
+      "underestimate_m": 0.5084228515625
+    }
+  ],
+  "relay_relation_mismatches": [
+    {
+      "mission": "R-001",
+      "claimed": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "actual": [
+        "T005",
+        "T006",
+        "T008"
+      ]
+    },
+    {
+      "mission": "R-002",
+      "claimed": [
+        "T001",
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008"
+      ],
+      "actual": [
+        "T002",
+        "T004",
+        "T005",
+        "T006",
+        "T007"
+      ]
+    },
+    {
+      "mission": "R-004",
+      "claimed": [
+        "T009",
+        "T010",
+        "T011",
+        "T012"
+      ],
+      "actual": [
+        "T010",
+        "T011"
+      ]
+    },
+    {
+      "mission": "R-005",
+      "claimed": [
+        "T013",
+        "T014",
+        "T015"
+      ],
+      "actual": [
+        "T013",
+        "T014"
+      ]
+    },
+    {
+      "mission": "R-007",
+      "claimed": [
+        "T018",
+        "T019"
+      ],
+      "actual": [
+        "T019"
+      ]
+    },
+    {
+      "mission": "R-009",
+      "claimed": [
+        "T020",
+        "T021"
+      ],
+      "actual": [
+        "T021"
+      ]
+    },
+    {
+      "mission": "R-012",
+      "claimed": [
+        "T023",
+        "T024",
+        "T025",
+        "T026"
+      ],
+      "actual": [
+        "T023",
+        "T024"
+      ]
+    }
+  ],
+  "fixed_group_comparison": [
+    {
+      "K": 2,
+      "group": 1,
+      "services": "S001;S002;S003;S004;S005;S006;S007;S008;S009;S011;S012;S013;S015",
+      "extra_missions": [],
+      "claimed": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-003",
+          "R-004",
+          "R-005",
+          "R-006",
+          "R-007",
+          "R-008",
+          "R-009",
+          "R-010",
+          "R-011",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 4,
+        "relay_workload_h": 13.718395013836016
+      },
+      "actual": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-003",
+          "R-004",
+          "R-005",
+          "R-006",
+          "R-007",
+          "R-008",
+          "R-009",
+          "R-010",
+          "R-011",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 4,
+        "relay_workload_h": 13.718395013836016
+      }
+    },
+    {
+      "K": 2,
+      "group": 2,
+      "services": "S010;S014",
+      "extra_missions": [],
+      "claimed": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 2,
+        "relay_workload_h": 3.6109942000146424
+      },
+      "actual": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 2,
+        "relay_workload_h": 3.6109942000146424
+      }
+    },
+    {
+      "K": 3,
+      "group": 1,
+      "services": "S001;S002;S003;S004;S005;S006;S007;S008;S009;S011;S012;S015",
+      "extra_missions": [],
+      "claimed": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-003",
+          "R-004",
+          "R-005",
+          "R-006",
+          "R-007",
+          "R-008",
+          "R-009",
+          "R-010",
+          "R-011",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 4,
+        "relay_workload_h": 13.718395013836016
+      },
+      "actual": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-003",
+          "R-004",
+          "R-005",
+          "R-006",
+          "R-007",
+          "R-008",
+          "R-009",
+          "R-010",
+          "R-011",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 4,
+        "relay_workload_h": 13.718395013836016
+      }
+    },
+    {
+      "K": 3,
+      "group": 2,
+      "services": "S010;S014",
+      "extra_missions": [],
+      "claimed": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 2,
+        "relay_workload_h": 3.6109942000146424
+      },
+      "actual": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 2,
+        "relay_workload_h": 3.6109942000146424
+      }
+    },
+    {
+      "K": 3,
+      "group": 3,
+      "services": "S013",
+      "extra_missions": [
+        "R-001",
+        "R-012"
+      ],
+      "claimed": {
+        "missions": [
+          "R-001",
+          "R-002",
+          "R-012",
+          "R-013"
+        ],
+        "relay_uav": 2,
+        "relay_pack": 2,
+        "relay_workload_h": 3.6109942000146424
+      },
+      "actual": {
+        "missions": [
+          "R-002",
+          "R-013"
+        ],
+        "relay_uav": 1,
+        "relay_pack": 1,
+        "relay_workload_h": 1.7505740683887951
+      }
+    }
+  ]
+}
