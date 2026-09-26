@@ -1880,6 +1880,9 @@ def _schedule_q3_joint(
         "P2A": (109.20555555555556, 23.049444444444443, 703.3844604492188),
         "P2B": (109.22555555555556, 23.069444444444446, 626.3524169921875),
         "P3A": (109.23833333333333, 23.052777777777777, 534.8773498535156),
+        # W4 replacement for P1B.  This nearby DEM point closes the short
+        # conservative-certificate gap on T017 while preserving T016 coverage.
+        "P4B": (109.20333333333333, 23.020833333333332, 689.1195983886719),
     }
     if len(q2_trips) != 22:
         raise ValueError(
@@ -1889,7 +1892,7 @@ def _schedule_q3_joint(
         ("W1", list(range(0, 8)), ["P1A", "P1B"]),
         ("W2", list(range(8, 12)), ["P2A", "P2B"]),
         ("W3", list(range(12, 15)), ["P3A"]),
-        ("W4", list(range(15, 17)), ["P1A", "P1B"]),
+        ("W4", list(range(15, 17)), ["P1A", "P4B"]),
         ("W5", list(range(17, 19)), ["P2B"]),
         ("W6", list(range(19, 21)), ["P1A", "P2A"]),
         ("W7", [21], ["P2A"]),
