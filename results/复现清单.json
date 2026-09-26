@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "created_at_utc": "2026-09-23T14:37:43.993043+00:00",
+  "created_at_utc": "2026-09-25T07:48:11.908600+00:00",
   "random_seed": 20260923,
   "reproduce_command": ".venv\\Scripts\\python.exe reproduce.py",
   "pipeline": [
@@ -74,8 +74,8 @@
   "source_files": [
     {
       "path": "solve_d.py",
-      "bytes": 100577,
-      "sha256": "292058A71C8F0D421DE1D1DB9B9B4E8D3933C5E82CA68E285031A773A277B231"
+      "bytes": 101446,
+      "sha256": "7418FD44D042CDD2AA27DF2F609373F79F35332C4C7508EEA98C18E5CAA73FD6"
     },
     {
       "path": "sensitivity_analysis.py",
@@ -112,7 +112,7 @@
     {
       "path": "figures\\process_q1_reserve_sensitivity.svg",
       "bytes": 24424,
-      "sha256": "44C7EA64354A492F23AF00A612AA4F4B76C5012D551A1E73D75347FC84F266C7"
+      "sha256": "101F458994AC01A86C277AFDF0E320ACCC76166919E4C81B7BD12EE7AC9CC4C9"
     },
     {
       "path": "figures\\process_q2_uav_gantt.png",
@@ -122,7 +122,7 @@
     {
       "path": "figures\\process_q2_uav_gantt.svg",
       "bytes": 20056,
-      "sha256": "2E580EACA717C94157CEBFE466FBE6B99BE0EB104B83F3294ACE24D45A89CC1F"
+      "sha256": "0600305174091D9DD2967412466ADEAF018D75B6F91F946D11AC21BB272D5442"
     },
     {
       "path": "figures\\process_q3_relay_gantt.png",
@@ -132,17 +132,17 @@
     {
       "path": "figures\\process_q3_relay_gantt.svg",
       "bytes": 15044,
-      "sha256": "4D532108055FDFDE5329F25F390622BDE557034E17656CC0E4D8F8B24D0C38C7"
+      "sha256": "43E2DE7CBBBC3D5ADC21BB692B45A1D70112D10E96538117BD4AF81E5E4EFF0E"
     },
     {
       "path": "figures\\process_q4_resource_tradeoff.png",
-      "bytes": 107401,
-      "sha256": "1396CBBDE6192197B1BEDDC45773BC83F644416C2E87E5766A941297DCAD0A58"
+      "bytes": 109913,
+      "sha256": "6CF6AB9D3151841DE79DAB689F69EE8911C01C4D021FD614C91DE0BDF5CB920C"
     },
     {
       "path": "figures\\process_q4_resource_tradeoff.svg",
-      "bytes": 29402,
-      "sha256": "0852091EFE87F0376C761EB3D67C79263685D0ED38770BFDC51F37D5EF97AA60"
+      "bytes": 29419,
+      "sha256": "FBFE350BBA464DE756C193250E5623DBD60CB8D37396F1B4C5EFEB40EC554760"
     },
     {
       "path": "figures\\qa\\process_q1_reserve_sensitivity_qa_gray.png",
@@ -161,8 +161,8 @@
     },
     {
       "path": "figures\\qa\\process_q4_resource_tradeoff_qa_gray.png",
-      "bytes": 51570,
-      "sha256": "606FAEEC35D2AD8B7CEBEC8F793DE0E0C95EF3B8F6EE0A1C6EE6A15F93C4D3C0"
+      "bytes": 53221,
+      "sha256": "7FFA2422DB9F914E802D3CB1F9ABBA517B7862F2920FFD5B7768D5471CCD1CCF"
     },
     {
       "path": "figures\\qa\\raw_q1_distance_demand_qa_gray.png",
@@ -201,8 +201,8 @@
     },
     {
       "path": "figures\\qa\\result_q4_partition_map_qa_gray.png",
-      "bytes": 84703,
-      "sha256": "2C288B31DFA51A3EF0A115B4644243308CDD8E97103E4F15FA3AF893A432FC09"
+      "bytes": 85470,
+      "sha256": "B8094D77A4EB796348E4CFA59E6C0EF8E15A9B3CBA23BDD204FC65CFCCCED5B0"
     },
     {
       "path": "figures\\raw_q1_distance_demand.png",
@@ -212,7 +212,7 @@
     {
       "path": "figures\\raw_q1_distance_demand.svg",
       "bytes": 25945,
-      "sha256": "3C510AE123C75E8DFB0AF805EAE0CDF777F5E74B7254B6D9A0078085F561E414"
+      "sha256": "5F7D53BC9456ECC6E4C2955E6FC9E3479DC1A902E7B6F46E0BEB17B5E58C83FE"
     },
     {
       "path": "figures\\raw_q2_deadline_priority.png",
@@ -222,7 +222,7 @@
     {
       "path": "figures\\raw_q2_deadline_priority.svg",
       "bytes": 58131,
-      "sha256": "90A0ADC04BE6FC3BBE5F2ACEB8226D1BD5D8FA79B829CC7F6F8C47AF2C346A19"
+      "sha256": "AF810804162F3833262976246570B917BA80861CD57BF2B66C9097B7D253FDE3"
     },
     {
       "path": "figures\\raw_q3_relay_phase_duration.png",
@@ -232,7 +232,7 @@
     {
       "path": "figures\\raw_q3_relay_phase_duration.svg",
       "bytes": 24120,
-      "sha256": "AAB6FB9F42B627E5E1293C19C9E88F8892B8B9AD3505D89894347E2ABE5C4E84"
+      "sha256": "4FE84157BEE2550A9835851F13EE84782841928C45337EF1E3BF2DAD33CCCDC2"
     },
     {
       "path": "figures\\raw_q4_atomic_components.png",
@@ -242,7 +242,7 @@
     {
       "path": "figures\\raw_q4_atomic_components.svg",
       "bytes": 25530,
-      "sha256": "B6F1A29148A48A70777CA78301C0594B86B3D3EF9B6A9567560E6E03F39866E2"
+      "sha256": "2F21FCD52BF3940D3FDE06DFF1562AD0E7A174850164459B268A6004FF51BA45"
     },
     {
       "path": "figures\\result_q1_batch_utilization.png",
@@ -252,7 +252,7 @@
     {
       "path": "figures\\result_q1_batch_utilization.svg",
       "bytes": 17139,
-      "sha256": "9256B1E872ECD3A92274867721E4C6D75020CFFB4C5A06022D560A50D6EE144C"
+      "sha256": "E8F64DFAAF9FBBE9CF47E3DE65230A3F67B391A30831DA2D596AC307EC20DD50"
     },
     {
       "path": "figures\\result_q2_delivery_deadlines.png",
@@ -262,7 +262,7 @@
     {
       "path": "figures\\result_q2_delivery_deadlines.svg",
       "bytes": 23352,
-      "sha256": "03EFC07A975B00DFB3AC2CE39755DECE4DD2F0215AE0B6089DA1A7C1591F6F2A"
+      "sha256": "15713EBCEE4BFBC017C7D727B2CB9D1D196B86167A8A4E3D4329E7834D0E43AF"
     },
     {
       "path": "figures\\result_q3_communication_timeline.png",
@@ -272,22 +272,22 @@
     {
       "path": "figures\\result_q3_communication_timeline.svg",
       "bytes": 52340,
-      "sha256": "02735713C35C8D71AA33851F6C733FB62BAF58DDCDEBF08BFD1FB3F0ECCEC234"
+      "sha256": "2978ED46A542CFFDCCD04B192F1788DD08312F1A490EE3C1F0BB67A0B414BA1E"
     },
     {
       "path": "figures\\result_q4_partition_map.png",
-      "bytes": 180544,
-      "sha256": "BD6B2DFF93BD5412585624C0BAFE7FB3CB578B4FC9F7A84916BFEBD95749AF24"
+      "bytes": 181893,
+      "sha256": "6468485FDDD7FE870E51E53026D5FB7A0E39019988C9DCEC649A1ED86FBC1B99"
     },
     {
       "path": "figures\\result_q4_partition_map.svg",
       "bytes": 38207,
-      "sha256": "2EAAF735A3FA1EEE54347AC9064BBCF218CB461DC58698A816482A28FA4C58D5"
+      "sha256": "9E2436854B86B0428812B6E31DAEFD3417570085D9C01AF2B2BBF5A838FEDB58"
     },
     {
       "path": "results\\full_results.json",
       "bytes": 12654,
-      "sha256": "50C24BAB7CFF443A62623B53306005EF1CC2FCAD72B24B0F6A0E86014642593B"
+      "sha256": "9062A3B433D3E03EB2A43B38CBF78DDDA64D54F98C5F060360BB1247FBD42AB3"
     },
     {
       "path": "results\\q1_batches.csv",
@@ -331,13 +331,13 @@
     },
     {
       "path": "results\\q4_partition_resources.csv",
-      "bytes": 557,
-      "sha256": "2D913FCEF4A102886127D7B9BCA2FB53B1AD04781C43C7C4DA81877175FB1CE3"
+      "bytes": 554,
+      "sha256": "ACBB62E653D99785045B266F18EAFE82EF3607D38CC211E0D5298657C2812178"
     },
     {
       "path": "results\\q4_shortage_redundancy.csv",
       "bytes": 432,
-      "sha256": "1A2ECF16E90E15C5E03C32E313355466BBF70D4103BE0A9F14D4D50179CA24DC"
+      "sha256": "EDA6CDAAB98A448F903B8DDD9161B890C5AC34F02F6C15634562EA79F3AE392B"
     },
     {
       "path": "results\\sensitivity_q1_reserve.csv",
@@ -361,8 +361,8 @@
     },
     {
       "path": "结果提交表_D题.xlsx",
-      "bytes": 27780,
-      "sha256": "E5D672F637E6C15C3595B9AC9CE822ECB1A97F227142089FBA46C550E725D224"
+      "bytes": 27774,
+      "sha256": "0549725D4DA751F3F3E2EC2807B2A4B6B2D5E9F1C11AF4DB1C61C329BD291E5E"
     }
   ]
 }

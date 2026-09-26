@@ -378,7 +378,7 @@
   "q4": {
     "partition_rows": 5,
     "summary_rows": 16,
-    "max_shortfall": 4
+    "max_shortfall": 2
   },
   "sanity": {
     "q1_unique_cover": true,

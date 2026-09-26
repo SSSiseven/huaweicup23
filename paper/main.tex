@@ -1,0 +1,43 @@
+\documentclass[UTF8,zihao=-4,a4paper,fontset=windows]{ctexart}
+% 内置ctex基线初始化后按本地华为杯规范调整；阶段性正文入口，非最终提交模板。
+\usepackage{amsmath,amssymb,booktabs,array,longtable,tabularx}
+\usepackage{geometry,graphicx,float,caption,tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc}
+\usepackage[hidelinks]{hyperref}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\ctexset{section={format=\centering\heiti\zihao{4}},subsection={format=\heiti\zihao{-4}},subsubsection={format=\heiti\zihao{-4}}}
+\pagestyle{plain}
+\linespread{1}
+\setlength{\parindent}{2em}
+\setlength{\emergencystretch}{2em}
+\setlength{\textfloatsep}{14pt}
+\captionsetup{font=normalsize,labelsep=quad}
+\renewcommand{\arraystretch}{1.2}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\keywords}[1]{\par\noindent\textbf{关键词：}#1}
+\renewenvironment{abstract}{\begin{center}\heiti 摘\quad 要\end{center}}{\par}
+\newcommand{\lexmin}{\mathop{\mathrm{lexmin}}}
+\newcommand{\ind}{\mathbf{1}}
+\tikzset{block/.style={draw=blue!50!black,fill=blue!5,rounded corners=2pt,align=center,text width=3.1cm,minimum height=1cm,font=\small},edge/.style={-{Stealth[length=2mm]},thick,draw=blue!55!black}}
+\begin{document}
+\begin{center}
+{\heiti\zihao{3}山区应急物资运输与通信保障的协同建模}\par\medskip
+阶段性论文初稿：数据特征、模型与求解方法
+\end{center}
+\input{sections/abstract}
+\clearpage
+\input{sections/problem}
+\input{sections/assumptions_symbols}
+\input{sections/data_physics}
+\input{sections/q1_batching}
+\input{sections/q2_scheduling}
+\input{sections/q3_communication}
+\input{sections/q4_partition}
+\input{sections/validation}
+\input{sections/discussion}
+\bibliographystyle{unsrt}
+\bibliography{references}
+\clearpage
+\appendix
+\input{appendix/output_contract}
+\end{document}

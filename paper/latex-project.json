@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "contest": "cumcm",
+  "main_tex": "main.tex",
+  "template": {
+    "path": "C:\\Users\\陈三岁\\.codex\\skills\\math-modeling\\tools\\latex\\assets\\templates\\cumcm",
+    "source": null,
+    "version": null,
+    "sha256": "beffdfb2062dbc72f3d6050691ec9a3816d8f91fd85840720ddd8ec757a3ae61"
+  },
+  "template_files": {
+    "main.tex": "d606c76d66e26729d352fc81eae25c82850a5f5633c46167f626db402c7ae91b",
+    "references.bib": "c85fa9f8c7cdb3b0c8c2f394bebd7624f6ff5abdd6bac5b4f43b58e67ee7c222"
+  },
+  "resource_bindings": [
+    {
+      "source": "audit/paper_20260924/assets",
+      "destination": "figures/data",
+      "sha256": "2384ec5504bf4f2debdd6f12991b058e40054ad608153b85cc7645d8dad66f46",
+      "hash_mode": "tree",
+      "bound_at": "2026-09-24T03:58:28.007538+00:00"
+    },
+    {
+      "source": "audit/paper_20260924/paper_README.md",
+      "destination": "README.md",
+      "sha256": "6f8f58dfc1b8ed7ea795456bfd2994a70d5890da90d36d166d000128309c3b58",
+      "hash_mode": "content",
+      "bound_at": "2026-09-24T07:18:41.095767+00:00"
+    },
+    {
+      "source": "audit/paper_20260924/locked_main_snapshot.pdf",
+      "destination": "main.pdf",
+      "sha256": "d746d4ac3d7bba67b83d8eaaa36d00fcc0fddca989fb2ce03120527184c0bfb0",
+      "hash_mode": "content",
+      "bound_at": "2026-09-26T03:26:23.293198+00:00"
+    },
+    {
+      "source": "figures/q2",
+      "destination": "figures/q2",
+      "sha256": "632ba817ba16b6781f0354cef5cd5c4f8eb78f52a4d1b88e3f1c7ef5e8127d7b",
+      "hash_mode": "tree",
+      "bound_at": "2026-09-26T03:32:08.148260+00:00"
+    },
+    {
+      "source": "figures/common/figure1.png",
+      "destination": "figures/common/figure1.png",
+      "sha256": "3c43814249dbc2be4d6d30d843e1033c18a94bee0a561ff3daca436284d57e0f",
+      "hash_mode": "content",
+      "bound_at": "2026-09-26T05:06:55.541383+00:00"
+    },
+    {
+      "source": "figures/q1",
+      "destination": "figures/q1",
+      "sha256": "9cc1b0c1d47d9ba3db81831ba9bdd6ed72f878f538dbe5467c14182cefdd980b",
+      "hash_mode": "tree",
+      "bound_at": "2026-09-26T05:06:55.851802+00:00"
+    },
+    {
+      "source": "figures/q3_q4",
+      "destination": "figures/q3_q4",
+      "sha256": "ba432c25b518c82558520130e0035caa27bb49360eae46ee23a712d1aa6da0d2",
+      "hash_mode": "tree",
+      "bound_at": "2026-09-26T05:52:57.322284+00:00"
+    }
+  ],
+  "created_at": "2026-09-24T03:42:46.309442+00:00"
+}

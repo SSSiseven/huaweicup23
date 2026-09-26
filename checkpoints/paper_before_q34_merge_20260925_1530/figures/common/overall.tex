@@ -1,0 +1,16 @@
+\begin{tikzpicture}[node distance=7mm]
+\node[block,text width=12cm] (input) at (0,0) {输入：节点与DEM、逐箱需求与时限、无人机与能源库存、通信参数};
+\node[block,text width=12cm] (physics) at (0,-1.6) {公共计算：经过像元的最高高程、航段时间与能耗、两阶段充电、双向链路预算};
+\node[block,text width=5.2cm] (q1) at (-3,-3.3) {问题一：单点能力与组批\\安全载荷、可行子集、集合划分};
+\node[block,text width=5.2cm] (q2) at (3,-3.3) {问题二：多点运输调度\\访问顺序、实体机、电池与时刻};
+\node[block,text width=5.2cm] (q3) at (-3,-5.2) {问题三：运输与中继协同\\连续链路、悬停点、在位服务};
+\node[block,text width=5.2cm] (q4) at (3,-5.2) {问题四：固定方案分区\\共访任务块、实际保障关系、资源峰值};
+\node[block,text width=12cm] (check) at (0,-7) {验证：逐箱覆盖与时限、地形净空、能量约束、资源冲突、全时段通信与分区继承};
+\draw[edge] (input)--(physics);
+\draw[edge] (physics.south)-|(q1.north);
+\draw[edge] (q1)--(q2);
+\draw[edge] (q2.south)--++(0,-.3)-| (q3.north);
+\draw[edge] (q3)--(q4);
+\draw[edge] (q3.south)--(q3.south|-check.north);
+\draw[edge] (q4.south)--(q4.south|-check.north);
+\end{tikzpicture}

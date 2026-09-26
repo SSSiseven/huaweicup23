@@ -1,0 +1,12 @@
+# Fdb version 4
+["xdvipdfmx"] 0 "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.xdv" "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.pdf" "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main" 0 -1
+  "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.pdf"
+  (rewritten before read)
+["xelatex"] 1790406969.36857 "main.tex" "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.xdv" "main" 1790406970.2856 2
+  (generated)
+  "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.aux"
+  "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.log"
+  "C:/Users/宸择/Desktop/华为杯/.qa/compile_current/main.xdv"
+  (rewritten before read)

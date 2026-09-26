@@ -1,0 +1,15 @@
+{
+  "stage": 2,
+  "status": "V1_CREATED",
+  "source": "build_paper_v1.py",
+  "template": "官方资料\\第二十三届华为杯论文模板.docx",
+  "template_sha256": "1C8E97A86243CA2299E160A1B29523B58B1E5623EB29A6FA66599AE3686547FA",
+  "output": "完整论文.docx",
+  "output_sha256": "9282F433BFDD4696E90AD49C50F93E2B32643928E5001665079B1731D0DC0929",
+  "checkpoint": "checkpoints\\完整论文-V1.docx",
+  "checkpoint_sha256": "9282F433BFDD4696E90AD49C50F93E2B32643928E5001665079B1731D0DC0929",
+  "figures": 12,
+  "tables": 10,
+  "references": 10,
+  "note": "Stage-2 complete draft; page-by-page render QA is reserved for stage 3."
+}

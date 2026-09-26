@@ -1997,7 +1997,10 @@ def _max_overlap(intervals: list[tuple[float, float]]) -> int:
 
 
 def _solve_q4_partitions(
-    data: dict[str, Any], q3_trips: list[dict[str, Any]], relay_missions: list[dict[str, Any]]
+    data: dict[str, Any],
+    q3_trips: list[dict[str, Any]],
+    relay_missions: list[dict[str, Any]],
+    communication_rows: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     services = sorted(k for k in data["nodes"] if k.startswith("S"))
     parent = {s: s for s in services}
@@ -2028,10 +2031,25 @@ def _solve_q4_partitions(
         "relay_pack": data["relay_inventory"]["packs"],
     }
 
+    # A relay mission belongs to a partition only when the final communication
+    # segmentation actually assigns that mission to one of the partition's
+    # transport trips.  ``served_trip_ids`` is the wave-level candidate list
+    # used during Q3 coverage search and can include trips that remained on a
+    # direct link or were assigned to another relay; using it here would copy
+    # unnecessary relay tasks into Q4 and overstate independent resources.
+    actual_trips_by_mission: dict[str, set[str]] = {}
+    for row in communication_rows:
+        mission_id = row.get("relay_mission_id")
+        if mission_id:
+            actual_trips_by_mission.setdefault(str(mission_id), set()).add(str(row["trip_id"]))
+
     def resources_for(group: set[str]) -> tuple[dict[str, int], float, float]:
         trips = [x for x in q3_trips if set(x["route"]) & group]
         trip_ids = {x["trip_id"] for x in trips}
-        missions = [x for x in relay_missions if trip_ids & set(x["served_trip_ids"])]
+        missions = [
+            x for x in relay_missions
+            if trip_ids & actual_trips_by_mission.get(x["mission_id"], set())
+        ]
         needs: dict[str, int] = {}
         for type_id in ("A", "B", "C"):
             typed = [x for x in trips if x["type_id"] == type_id]
@@ -2164,7 +2182,9 @@ def run_full(project_root: Path) -> dict[str, Any]:
     )
     pd.DataFrame(relay_rows).to_csv(results_dir / "q3_relay_missions.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(communication_rows).to_csv(results_dir / "q3_communication_segments.csv", index=False, encoding="utf-8-sig")
-    q4_rows, q4_summary = _solve_q4_partitions(data, q3_trips, relay_missions)
+    q4_rows, q4_summary = _solve_q4_partitions(
+        data, q3_trips, relay_missions, communication_rows
+    )
     pd.DataFrame(q4_rows).to_csv(results_dir / "q4_partition_resources.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(q4_summary).to_csv(results_dir / "q4_shortage_redundancy.csv", index=False, encoding="utf-8-sig")
 
