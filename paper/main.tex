@@ -1,7 +1,8 @@
 \documentclass[UTF8,zihao=-4,a4paper,fontset=windows]{ctexart}
-% 内置ctex基线初始化后按本地华为杯规范调整；阶段性正文入口，非最终提交模板。
+% 内置ctex基线初始化后按本地华为杯论文格式调整。
 \usepackage{amsmath,amssymb,booktabs,array,longtable,tabularx}
 \usepackage{geometry,graphicx,float,caption,tikz}
+\usepackage{xcolor,listings,seqsplit,multicol}
 \usetikzlibrary{arrows.meta,positioning,fit,calc}
 \usepackage[hidelinks]{hyperref}
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
@@ -11,6 +12,7 @@
 \setlength{\parindent}{2em}
 \setlength{\emergencystretch}{2em}
 \setlength{\textfloatsep}{14pt}
+\setcounter{tocdepth}{3}
 \captionsetup{font=normalsize,labelsep=quad}
 \renewcommand{\arraystretch}{1.2}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
@@ -19,12 +21,46 @@
 \newcommand{\lexmin}{\mathop{\mathrm{lexmin}}}
 \newcommand{\ind}{\mathbf{1}}
 \tikzset{block/.style={draw=blue!50!black,fill=blue!5,rounded corners=2pt,align=center,text width=3.1cm,minimum height=1cm,font=\small},edge/.style={-{Stealth[length=2mm]},thick,draw=blue!55!black}}
+\lstdefinestyle{pythonappendix}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue!60!black},
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{orange!55!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=7pt,
+  frame=single,
+  rulecolor=\color{gray!45},
+  breaklines=true,
+  breakatwhitespace=false,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  xleftmargin=1.5em,
+  framexleftmargin=1.2em,
+  aboveskip=8pt,
+  belowskip=10pt
+}
 \begin{document}
 \begin{center}
 {\heiti\zihao{3}山区应急物资运输与通信保障的协同建模}\par\medskip
-阶段性论文初稿：数据特征、模型与求解方法
+吃炸家
 \end{center}
 \input{sections/abstract}
+\clearpage
+\begin{center}{\heiti\zihao{4}目\quad 录}\end{center}
+\vspace{-0.8em}
+\begingroup
+\scriptsize
+\renewcommand{\baselinestretch}{0.90}\selectfont
+\setlength{\parskip}{0pt}
+\begin{multicols}{2}
+\raggedcolumns
+\makeatletter\@starttoc{toc}\makeatother
+\end{multicols}
+\endgroup
 \clearpage
 \input{sections/problem}
 \input{sections/assumptions_symbols}
@@ -33,11 +69,17 @@
 \input{sections/q2_scheduling}
 \input{sections/q3_communication}
 \input{sections/q4_partition}
+\input{sections/implementation}
 \input{sections/validation}
 \input{sections/discussion}
+\begingroup
+\footnotesize
 \bibliographystyle{unsrt}
 \bibliography{references}
+\endgroup
 \clearpage
 \appendix
 \input{appendix/output_contract}
+\input{appendix/ai_usage}
+\input{appendix/code_listing}
 \end{document}

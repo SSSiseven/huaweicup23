@@ -1,0 +1,171 @@
+\contentsline {section}{\numberline {1}问题重述与总体分析}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}场景与研究任务}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}四个问题的层次与衔接}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}研究策略与评价原则}{5}{subsection.1.3}%
+\contentsline {section}{\numberline {2}模型假设与符号说明}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}模型假设及适用条件}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}主要符号}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}数据特征与公共物理模型}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}数据来源与统一口径}{6}{subsection.3.1}%
+\contentsline {paragraph}{（1）数据对象及其关联关系}{6}{paragraph*.2}%
+\contentsline {subsection}{\numberline {3.2}数据预处理与质量控制}{7}{subsection.3.2}%
+\contentsline {paragraph}{（1）编号、单位与缺失值处理}{7}{paragraph*.5}%
+\contentsline {paragraph}{（2）需求汇总与双向核对}{7}{paragraph*.6}%
+\contentsline {paragraph}{（3）空间数据与DEM配准}{8}{paragraph*.7}%
+\contentsline {subsection}{\numberline {3.3}需求结构与时限分类}{8}{subsection.3.3}%
+\contentsline {paragraph}{（1）硬时限集合的构造}{8}{paragraph*.9}%
+\contentsline {paragraph}{（2）需求规模与紧迫性分布}{8}{paragraph*.10}%
+\contentsline {subsection}{\numberline {3.4}异构机型与能源库存}{10}{subsection.3.4}%
+\contentsline {paragraph}{（1）容量差异与资源数量}{10}{paragraph*.13}%
+\contentsline {paragraph}{（2）数据特征对模型设计的影响}{10}{paragraph*.15}%
+\contentsline {subsection}{\numberline {3.5}航段、地形净空与飞行时间}{10}{subsection.3.5}%
+\contentsline {paragraph}{（1）水平距离与巡航海拔}{10}{paragraph*.17}%
+\contentsline {subsection}{\numberline {3.6}载荷相关能耗与返航约束}{11}{subsection.3.6}%
+\contentsline {paragraph}{（1）水平飞行与爬升能耗}{11}{paragraph*.18}%
+\contentsline {subsection}{\numberline {3.7}两阶段充电与资源再次可用}{11}{subsection.3.7}%
+\contentsline {paragraph}{（1）SOC分段充电函数}{11}{paragraph*.19}%
+\contentsline {subsection}{\numberline {3.8}公共模型的量纲与边界核验}{12}{subsection.3.8}%
+\contentsline {paragraph}{（1）量纲一致性}{12}{paragraph*.20}%
+\contentsline {paragraph}{（2）极端状态检查}{12}{paragraph*.21}%
+\contentsline {section}{\numberline {4}问题一：单点往返运输能力与货箱组批}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}问题分析}{12}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}任务分解与输入输出}{12}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}主要矛盾与约束层次}{12}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}模型选择理由}{12}{subsubsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.2}安全载荷模型}{13}{subsection.4.2}%
+\contentsline {paragraph}{往返能耗函数与边界条件}{13}{paragraph*.22}%
+\contentsline {paragraph}{单调性与二分求解}{13}{paragraph*.23}%
+\contentsline {subsection}{\numberline {4.3}货箱组批优化模型}{13}{subsection.4.3}%
+\contentsline {paragraph}{可行子集与多指标代价}{13}{paragraph*.24}%
+\contentsline {paragraph}{集合划分动态规划}{14}{paragraph*.25}%
+\contentsline {subsection}{\numberline {4.4}算法实现与性质说明}{14}{subsection.4.4}%
+\contentsline {paragraph}{候选组织与路径记录}{14}{paragraph*.27}%
+\contentsline {paragraph}{正确性与计算复杂度}{14}{paragraph*.28}%
+\contentsline {paragraph}{安全载荷计算结果}{15}{paragraph*.29}%
+\contentsline {paragraph}{空间差异与受限节点}{15}{paragraph*.30}%
+\contentsline {subsection}{\numberline {4.5}组批方案与结果分析}{15}{subsection.4.5}%
+\contentsline {paragraph}{总体组批结果}{15}{paragraph*.32}%
+\contentsline {paragraph}{约束利用率与方案解释}{15}{paragraph*.34}%
+\contentsline {section}{\numberline {5}问题二：异构无人机多点多架次运输调度}{16}{section.5}%
+\contentsline {subsection}{\numberline {5.1}问题分析}{16}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}由独立组批到耦合调度}{16}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}关键决策与难点}{17}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}求解框架选择}{17}{subsubsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.2}时限—能量—资源统一模型}{17}{subsection.5.2}%
+\contentsline {paragraph}{决策表示与硬软时限}{17}{paragraph*.36}%
+\contentsline {paragraph}{逐站时刻与剩余载荷递推}{17}{paragraph*.37}%
+\contentsline {paragraph}{实体机与电池的双资源约束}{18}{paragraph*.38}%
+\contentsline {subsection}{\numberline {5.3}求解流程与指标权衡}{18}{subsection.5.3}%
+\contentsline {paragraph}{分层评价指标}{18}{paragraph*.40}%
+\contentsline {paragraph}{基线与混装方案构造}{18}{paragraph*.41}%
+\contentsline {paragraph}{事件仿真与资源落地}{19}{paragraph*.42}%
+\contentsline {subsection}{\numberline {5.4}调度结果与对比分析}{20}{subsection.5.4}%
+\contentsline {paragraph}{基线设置与总体指标}{20}{paragraph*.44}%
+\contentsline {paragraph}{资源时间轴与可执行性}{20}{paragraph*.46}%
+\contentsline {paragraph}{改进幅度及其原因}{21}{paragraph*.48}%
+\contentsline {section}{\numberline {6}问题三：连续通信约束下的运输与中继协同}{21}{section.6}%
+\contentsline {subsection}{\numberline {6.1}问题分析}{21}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}问题二与问题三的依赖关系}{21}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}时空耦合与主要难点}{22}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}输出目标与评价次序}{22}{subsubsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.2}通信可用性模型}{22}{subsection.6.2}%
+\contentsline {paragraph}{双向链路预算}{22}{paragraph*.49}%
+\contentsline {paragraph}{合法拓扑与全时段服务}{23}{paragraph*.50}%
+\contentsline {subsection}{\numberline {6.3}中继任务与资源模型}{23}{subsection.6.3}%
+\contentsline {paragraph}{候选悬停点与飞行过程}{23}{paragraph*.52}%
+\contentsline {paragraph}{实体机、能源组件与可用区间}{23}{paragraph*.53}%
+\contentsline {subsection}{\numberline {6.4}候选覆盖与联合调度方法}{24}{subsection.6.4}%
+\contentsline {paragraph}{离线选点与方案固化}{24}{paragraph*.54}%
+\contentsline {paragraph}{覆盖关系与运输波次}{24}{paragraph*.55}%
+\contentsline {paragraph}{中继任务阶段与联合目标}{24}{paragraph*.57}%
+\contentsline {subsection}{\numberline {6.5}连续性验证与联合调度结果}{25}{subsection.6.5}%
+\contentsline {paragraph}{连续区间认证方法}{25}{paragraph*.59}%
+\contentsline {paragraph}{联合排程总体结果}{25}{paragraph*.60}%
+\contentsline {paragraph}{通信分段与双重验证}{26}{paragraph*.62}%
+\contentsline {paragraph}{通信保障代价}{26}{paragraph*.65}%
+\contentsline {subsection}{\numberline {6.6}链路裕量诊断与实施边界}{27}{subsection.6.6}%
+\contentsline {paragraph}{附加损耗敏感性}{27}{paragraph*.66}%
+\contentsline {paragraph}{工程解释与适用边界}{27}{paragraph*.68}%
+\contentsline {section}{\numberline {7}问题四：固定联合方案下的任务分区与资源配置}{28}{section.7}%
+\contentsline {subsection}{\numberline {7.1}问题分析}{28}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}分区对象与固定条件}{28}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}资源归属的判定难点}{28}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}评价指标与模型选择}{28}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}任务图与合法分区模型}{28}{subsection.7.2}%
+\contentsline {paragraph}{不可拆任务块}{28}{paragraph*.69}%
+\contentsline {paragraph}{合法分区的0--1表示}{29}{paragraph*.71}%
+\contentsline {subsection}{\numberline {7.3}任务归属与资源配置模型}{29}{subsection.7.3}%
+\contentsline {paragraph}{从实际通信分段确定中继归属}{29}{paragraph*.72}%
+\contentsline {paragraph}{固定时序的最小独立资源数}{30}{paragraph*.74}%
+\contentsline {paragraph}{库存缺口、冗余与组间均衡}{30}{paragraph*.75}%
+\contentsline {paragraph}{分区枚举与算法说明}{30}{paragraph*.76}%
+\contentsline {paragraph}{标签规范化与完整枚举}{31}{paragraph*.77}%
+\contentsline {paragraph}{资源峰值算法的充分必要性}{31}{paragraph*.78}%
+\contentsline {paragraph}{多指标比较规则}{31}{paragraph*.79}%
+\contentsline {subsection}{\numberline {7.4}分区结果与管理含义}{31}{subsection.7.4}%
+\contentsline {paragraph}{两组与三组最优配置}{31}{paragraph*.80}%
+\contentsline {paragraph}{库存缺口与分区冗余}{32}{paragraph*.82}%
+\contentsline {paragraph}{空间格局与负荷均衡}{32}{paragraph*.85}%
+\contentsline {section}{\numberline {8}算法实现与计算流程}{32}{section.8}%
+\contentsline {subsection}{\numberline {8.1}公共数据结构与计算接口}{32}{subsection.8.1}%
+\contentsline {paragraph}{对象化数据组织}{32}{paragraph*.87}%
+\contentsline {paragraph}{统一路线评价函数}{33}{paragraph*.88}%
+\contentsline {subsection}{\numberline {8.2}问题一求解器实现}{33}{subsection.8.2}%
+\contentsline {paragraph}{安全载荷与候选箱组}{33}{paragraph*.89}%
+\contentsline {paragraph}{状态递推与结果恢复}{34}{paragraph*.90}%
+\contentsline {subsection}{\numberline {8.3}问题二调度器实现}{34}{subsection.8.3}%
+\contentsline {paragraph}{两套确定性任务构造}{34}{paragraph*.91}%
+\contentsline {paragraph}{实体机—电池事件排程}{34}{paragraph*.92}%
+\contentsline {subsection}{\numberline {8.4}问题三连续通信实现}{34}{subsection.8.4}%
+\contentsline {paragraph}{离线选点与固定波次输入}{34}{paragraph*.93}%
+\contentsline {paragraph}{连续区间递归认证}{34}{paragraph*.94}%
+\contentsline {subsection}{\numberline {8.5}问题四分区枚举实现}{35}{subsection.8.5}%
+\contentsline {paragraph}{原子块与规范化分组}{35}{paragraph*.95}%
+\contentsline {paragraph}{资源扫描与方案排序}{35}{paragraph*.96}%
+\contentsline {subsection}{\numberline {8.6}关键实现参数与输出接口}{35}{subsection.8.6}%
+\contentsline {section}{\numberline {9}模型检验、误差分析与评价}{35}{section.9}%
+\contentsline {subsection}{\numberline {9.1}分层检验思路}{35}{subsection.9.1}%
+\contentsline {paragraph}{从公共物理量到全局方案}{35}{paragraph*.98}%
+\contentsline {paragraph}{检验指标的判定层次}{36}{paragraph*.99}%
+\contentsline {paragraph}{可行性、守恒关系与交叉复核}{36}{paragraph*.100}%
+\contentsline {paragraph}{四问关键检验}{36}{paragraph*.101}%
+\contentsline {paragraph}{基线、等价公式与反向回算}{36}{paragraph*.103}%
+\contentsline {subsection}{\numberline {9.2}敏感性实验与解释边界}{37}{subsection.9.2}%
+\contentsline {paragraph}{实验设计与重算范围}{37}{paragraph*.104}%
+\contentsline {paragraph}{地面延误传播}{37}{paragraph*.106}%
+\contentsline {paragraph}{链路保守余量}{37}{paragraph*.107}%
+\contentsline {subsection}{\numberline {9.3}误差来源、数值精度与影响}{38}{subsection.9.3}%
+\contentsline {paragraph}{误差分类与控制方式}{38}{paragraph*.108}%
+\contentsline {paragraph}{空间误差的传播路径}{38}{paragraph*.110}%
+\contentsline {paragraph}{时间误差与事件传播}{38}{paragraph*.111}%
+\contentsline {paragraph}{算法误差与最优性边界}{39}{paragraph*.112}%
+\contentsline {subsection}{\numberline {9.4}模型评价与适用边界}{39}{subsection.9.4}%
+\contentsline {paragraph}{模型优点}{39}{paragraph*.113}%
+\contentsline {paragraph}{模型局限}{39}{paragraph*.114}%
+\contentsline {paragraph}{适用场景}{39}{paragraph*.115}%
+\contentsline {subsection}{\numberline {9.5}模型特点与可推广方向}{39}{subsection.9.5}%
+\contentsline {paragraph}{统一事件时间轴}{39}{paragraph*.116}%
+\contentsline {paragraph}{连续认证与离散复核分工}{39}{paragraph*.117}%
+\contentsline {paragraph}{从可执行性到滚动优化}{39}{paragraph*.118}%
+\contentsline {paragraph}{图表与数值的一致性检查}{39}{paragraph*.119}%
+\contentsline {paragraph}{图、表与明细数据的对应}{40}{paragraph*.120}%
+\contentsline {section}{\numberline {10}结论}{40}{section.10}%
+\contentsline {subsection}{\numberline {10.1}问题一结论}{40}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}问题二结论}{40}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}问题三结论}{40}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}问题四结论}{40}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}综合建议}{41}{subsection.10.5}%
+\contentsline {section}{\numberline {A}逐区需求与结果表口径}{42}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}逐服务区需求统计}{42}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}逐箱、逐架次和通信分段的输出}{43}{subsection.A.2}%
+\contentsline {section}{\numberline {B}人工智能工具使用说明}{43}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}工具信息与使用范围}{43}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}代表性输入内容与后续处理}{43}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}队员的独立判断与责任}{44}{subsection.B.3}%
+\contentsline {section}{\numberline {C}关键算法源代码}{44}{appendix.C}%
+\contentsline {subsection}{\numberline {C.1}问题一：航段能耗、安全载荷与集合划分}{44}{subsection.C.1}%
+\contentsline {subsection}{\numberline {C.2}问题二：多点路线递推与双资源排程}{46}{subsection.C.2}%
+\contentsline {subsection}{\numberline {C.3}问题三：链路判定、连续认证与固定波次执行}{51}{subsection.C.3}%
+\contentsline {subsection}{\numberline {C.4}问题四：峰值资源核算与完整分区枚举}{57}{subsection.C.4}%
+\contentsline {subsection}{\numberline {C.5}代码与正文结果的对应关系}{58}{subsection.C.5}%
+\contentsline {subsection}{\numberline {C.6}运行环境与执行顺序}{59}{subsection.C.6}%

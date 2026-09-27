@@ -1,6 +1,11 @@
+# AI 辅助说明：本程序及代码是在人工智能工具 OpenAI Codex（GPT-5，
+# 开发机构 OpenAI，公开版本日期 2025-08-07）辅助下完成的；
+# 图表数据与含义由参赛队结合原始结果复核。
 from pathlib import Path
 import shutil
 
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import pandas as pd
@@ -84,9 +89,9 @@ def main() -> None:
     paper = ROOT / "paper" / "figures" / "q2"
     authority.mkdir(parents=True, exist_ok=True)
     paper.mkdir(parents=True, exist_ok=True)
-    for suffix in ("pdf", "png"):
+    for suffix in ("svg", "pdf", "png"):
         path = authority / f"q2_resource_gantt.{suffix}"
-        fig.savefig(path, dpi=300 if suffix == "png" else None, bbox_inches="tight")
+        fig.savefig(path, dpi=300 if suffix == "png" else None)
         shutil.copy2(path, paper / path.name)
     plt.close(fig)
 

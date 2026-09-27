@@ -60,10 +60,14 @@ def write_manifest() -> None:
     sources = [ROOT / name for name in (
         "solve_d.py", "sensitivity_analysis.py", "make_figures.py",
         "export_submission.py", "reproduce.py", "requirements-lock.txt",
+        "scripts/plot_q1_batch_utilization.py",
+        "scripts/plot_q1_safe_payload_heatmap.py",
+        "scripts/plot_q2_resource_gantt.py",
+        "scripts/plot_q34_figures.py",
     )]
     result_names = [
-        "full_results.json",
-        "q1_batches.csv", "q1_safe_payload.csv",
+        "full_results.json", "q2_results.json", "q34_results.json",
+        "q1_batches.csv", "q1_safe_payload.csv", "q1_batch_utilization.csv",
         "q2_transport_trips.csv", "q2_box_deliveries.csv",
         "q3_transport_trips.csv", "q3_box_deliveries.csv",
         "q3_relay_missions.csv", "q3_communication_segments.csv",
@@ -73,9 +77,10 @@ def write_manifest() -> None:
     ]
     outputs = sorted(
         [RESULTS / name for name in result_names]
-        + list(FIGURES.glob("*.png"))
-        + list(FIGURES.glob("*.svg"))
-        + list((FIGURES / "qa").glob("*_qa_gray.png"))
+        + [RESULTS / "当前结果状态.md"]
+        + list(FIGURES.rglob("*.png"))
+        + list(FIGURES.rglob("*.svg"))
+        + list(FIGURES.rglob("*.pdf"))
         + [ROOT / "结果提交表_D题.xlsx"],
         key=lambda p: str(p),
     )
@@ -91,6 +96,10 @@ def write_manifest() -> None:
             "solve_d.py --mode full",
             "sensitivity_analysis.py",
             "make_figures.py",
+            "scripts/plot_q1_safe_payload_heatmap.py",
+            "scripts/plot_q1_batch_utilization.py",
+            "scripts/plot_q2_resource_gantt.py",
+            "scripts/plot_q34_figures.py",
             "export_submission.py",
         ],
         "scope_note": "diagnose_q3.py/search_relay_pair.py/test_*.py are exploratory diagnostics, not required to reproduce the submitted solution",
@@ -126,6 +135,10 @@ def main() -> int:
     run("solve_d.py", "--mode", "full")
     run("sensitivity_analysis.py")
     run("make_figures.py")
+    run("scripts/plot_q1_safe_payload_heatmap.py")
+    run("scripts/plot_q1_batch_utilization.py")
+    run("scripts/plot_q2_resource_gantt.py")
+    run("scripts/plot_q34_figures.py")
     run("export_submission.py")
     write_manifest()
     return 0

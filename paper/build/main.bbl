@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{D2026}
 {2026年中国研究生数学建模竞赛D题：山区洪涝灾害下无人机运输与通信协同优化},
@@ -10,5 +10,55 @@
   2026.
 \newblock
   用户提供附件，五份基础参数工作簿及30米数字高程模型.
+
+\bibitem{Dorling2017}
+Kevin Dorling, Jordan Heinrichs, Geoffrey~G. Messier, and Sebastian
+  Magierowski.
+\newblock Vehicle routing problems for drone delivery.
+\newblock {\em IEEE Transactions on Systems, Man, and Cybernetics: Systems},
+  47(1):70--85, 2017.
+
+\bibitem{Zhang2021}
+Junhui Zhang, James~F. Campbell, Donald~C. Sweeney, and Anthony~C. Hupman.
+\newblock Energy consumption models for delivery drones: A comparison and
+  assessment.
+\newblock {\em Transportation Research Part D: Transport and Environment},
+  90:102668, 2021.
+
+\bibitem{Cheng2020}
+Chi Cheng, Yossiri Adulyasak, and Louis-Martin Rousseau.
+\newblock Drone routing with energy function: Formulation and exact algorithm.
+\newblock {\em Transportation Research Part B: Methodological}, 139:364--387,
+  2020.
+
+\bibitem{Ropke2006}
+Stefan Ropke and David Pisinger.
+\newblock An adaptive large neighborhood search heuristic for the pickup and
+  delivery problem with time windows.
+\newblock {\em Transportation Science}, 40(4):455--472, 2006.
+
+\bibitem{ITUP525}
+{International Telecommunication Union}.
+\newblock Recommendation itu-r p.525-5: Calculation of free-space attenuation.
+\newblock Technical Report P.525-5, ITU, 2024.
+
+\bibitem{Feng2006}
+Qixing Feng, Joe McGeehan, Eustace~K. Tameh, and Andrew~R. Nix.
+\newblock Path loss models for air-to-ground radio channels in urban
+  environments.
+\newblock In {\em 2006 IEEE 63rd Vehicular Technology Conference}, volume~6,
+  pages 2901--2905, 2006.
+
+\bibitem{Zeng2016}
+Yong Zeng, Rui Zhang, and Teng~Joon Lim.
+\newblock Wireless communications with unmanned aerial vehicles: Opportunities
+  and challenges.
+\newblock {\em IEEE Communications Magazine}, 54(5):36--42, 2016.
+
+\bibitem{Karypis1998}
+George Karypis and Vipin Kumar.
+\newblock A fast and high quality multilevel scheme for partitioning irregular
+  graphs.
+\newblock {\em SIAM Journal on Scientific Computing}, 20(1):359--392, 1998.
 
 \end{thebibliography}

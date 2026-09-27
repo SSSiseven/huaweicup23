@@ -1,0 +1,78 @@
+\section{关键算法源代码}\label{app:key-code}
+
+本附录列出生成正文结果所使用的核心Python代码片段。代码取自求解脚本\texttt{solve\_d.py}的同步快照\texttt{paper/code/solve\_d.py}，保留原始行号，便于将公式、算法描述与实际实现逐项对应。为避免机械附上与结论无关的文件读写、绘图和格式转换代码，本文只收录四问的物理计算、组合优化、事件排程、连续通信认证和分区枚举核心；完整脚本与结果文件随支撑材料一并保存。
+
+\subsection{问题一：航段能耗、安全载荷与集合划分}
+
+代码清单\ref{lst:q1-physics}给出载荷相关等效航程、DEM航段计算、往返能耗及最大安全载荷二分。函数\texttt{leg\_metrics}每次从DEM路径像元中取最高高程并增加50~m净空，\texttt{max\_safe\_payload}在额定载荷区间内执行60次二分，因此与正文式\eqref{eq:safe-payload}使用同一口径。
+
+\lstinputlisting[style=pythonappendix,firstline=293,lastline=345,firstnumber=293,caption={航段能耗与最大安全载荷计算},label={lst:q1-physics}]{code/solve_d.py}
+
+代码清单\ref{lst:q1-dp}给出单服务区可行子集枚举与集合划分动态规划。候选必须同时满足质量、体积和返航能量约束；状态中保存当前最优完整路径，最低有效位锚定用于消除同一划分的排列重复。
+
+\lstinputlisting[style=pythonappendix,firstline=357,lastline=426,firstnumber=357,caption={问题一可行箱组枚举与动态规划},label={lst:q1-dp}]{code/solve_d.py}
+
+\subsection{问题二：多点路线递推与双资源排程}
+
+代码清单\ref{lst:q2-route}展示多点路线的统一事件递推。程序按访问顺序逐段计算剩余载荷下的飞行能耗，在每个服务区按硬截止、优先系数和货箱编号安排交接，并返回逐箱完成时刻、返航SOC和完整阶段记录。
+
+\lstinputlisting[style=pythonappendix,firstline=1329,lastline=1435,firstnumber=1329,caption={多点运输路线与逐箱交付时间轴},label={lst:q2-route}]{code/solve_d.py}
+
+代码清单\ref{lst:q2-build}对应正文的两套确定性任务构造。它先形成硬时限任务，按需枚举同目的地软箱补入，再对剩余软箱调用问题一精确组批，并贪心合并能够节能的异区单点任务。
+
+\lstinputlisting[style=pythonappendix,firstline=1490,lastline=1600,firstnumber=1490,caption={问题二基线与混装任务构造},label={lst:q2-build}]{code/solve_d.py}
+
+代码清单\ref{lst:q2-schedule}给出实体运输机和同型共享电池的事件排程核心。资源最早可用时刻共同决定任务开始，候选评分把硬迟到放在首位，随后比较软时限代价、交付、能耗和资源恢复时间。
+
+\lstinputlisting[style=pythonappendix,firstline=1603,lastline=1692,firstnumber=1603,caption={运输机—电池组合生成与任务排程核心},label={lst:q2-schedule}]{code/solve_d.py}
+
+\subsection{问题三：链路判定、连续认证与固定波次执行}
+
+代码清单\ref{lst:q3-link}实现直连或中继链路的距离、自由空间损耗、DEM遮挡附加损耗和余量判定，是通信分段与连续认证共同调用的基础函数。
+
+\lstinputlisting[style=pythonappendix,firstline=477,lastline=512,firstnumber=477,caption={空地链路状态与余量计算},label={lst:q3-link}]{code/solve_d.py}
+
+代码清单\ref{lst:q3-interval}给出单个时间区间的保守证书构造。程序把移动端点在局部平面中的轨迹包络为矩形，利用距离上界和经过DEM像元集合形成最坏情形链路余量下界；若该下界非负，则整个连续区间均可判为可用，而不是只依赖端点或中点采样。
+
+\lstinputlisting[style=pythonappendix,firstline=709,lastline=871,firstnumber=709,caption={单区间保守链路余量证书},label={lst:q3-interval}]{code/solve_d.py}
+
+代码清单\ref{lst:q3-cert}给出多中继连续检查的主要入口。程序先组织所有可能改变可用性的时间边界，再对每个区间调用保守认证；无法直接证明的区间继续递归细分，最终汇总最小下界余量和未认证区间。
+
+\lstinputlisting[style=pythonappendix,firstline=1757,lastline=1859,firstnumber=1757,caption={多中继连续区间认证入口},label={lst:q3-cert}]{code/solve_d.py}
+
+代码清单\ref{lst:q3-wave}明确列出离线搜索后固化的六个悬停点和W1--W7七个波次，并展示中继实体机、能源组件和运输资源状态的初始化。这一清单同时限定了正文第三问的复现边界：输入必须是所选问题二的22架次方案。
+
+\lstinputlisting[style=pythonappendix,firstline=1869,lastline=1975,firstnumber=1869,caption={问题三固定点位、波次与资源分配起始逻辑},label={lst:q3-wave}]{code/solve_d.py}
+
+\subsection{问题四：峰值资源核算与完整分区枚举}
+
+代码清单\ref{lst:q4-enum}先以半开区间事件扫描计算每类资源的峰值并发数，再从运输共访关系形成原子块。分区时固定第一个原子块的标签，遍历其余标签并排除空组，按总缺口、总配置、工作量变异系数和完成时刻极差选择方案，最后逐类型输出缺口与相对集中执行的冗余。
+
+\lstinputlisting[style=pythonappendix,firstline=2092,lastline=2220,firstnumber=2092,caption={问题四资源峰值与两组、三组分区枚举},label={lst:q4-enum}]{code/solve_d.py}
+
+\subsection{代码与正文结果的对应关系}
+
+上述清单覆盖了正文主要数值结论的生成链条：问题一的18架次来自清单\ref{lst:q1-dp}；问题二的22架次及逐箱时限由清单\ref{lst:q2-route}--\ref{lst:q2-schedule}产生；问题三的11个中继架次和连续通信证据由清单\ref{lst:q3-link}--\ref{lst:q3-wave}产生，其中清单\ref{lst:q3-interval}给出连续区间证书的核心；问题四的1023个两组候选与57002个三组带标签候选由清单\ref{lst:q4-enum}遍历。代码清单用于公开计算口径，不改变正文已报告的模型边界：问题一和固定方案下的问题四为精确离散求解，问题二只比较两套确定性构造，问题三采用离线搜索后固化的点位与波次。
+
+\subsection{运行环境与执行顺序}
+
+代码快照的SHA--256为\texttt{\seqsplit{57131c50ef5e68faf86ac7a4e9ee8e91fa3061fcfd6a07aa8319ef175011aea0}}。该摘要用于确认附录所示行号与实际执行文件属于同一版本；若代码发生修改，应重新生成结果并同步更新论文中的数值与图表。核心依赖及其用途见表\ref{tab:code-environment}。
+
+\begin{table}[H]
+\centering
+\caption{核心运行依赖与用途}\label{tab:code-environment}
+\begin{tabularx}{\textwidth}{p{3.0cm}p{3.0cm}Y}
+\toprule
+软件或库 & 固定版本 & 主要用途\\
+\midrule
+Python & 3.x & 主程序运行、数据结构与文件管理\\
+NumPy & 2.4.6 & 数组计算、统计量与轨迹采样\\
+Pandas & 2.3.3 & 工作簿读取、逐箱和逐任务表处理\\
+Pillow & 12.2.0 & DEM栅格读取与像元数据转换\\
+OpenPyXL & 3.1.5 & Excel附件解析支持\\
+Matplotlib/\newline Seaborn & 3.11.1/0.13.2 & 结果图与敏感性图绘制\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+在项目根目录执行\texttt{python solve\_d.py --mode full}即可依次计算四问；程序也支持\texttt{q2}和\texttt{q34}模式，用于在运输方案更新后分别重算后续环节。执行完成后，先检查程序返回状态，再核对80箱唯一覆盖、31个硬时限箱零违约、各实体资源区间无冲突、连续通信未认证区间为0以及分区资源缺口。这些检查全部通过后，方可用输出文件更新正文汇总表。若只修改论文文字而不修改输入、参数和求解脚本，则不应改变任何结果数字；若更换DEM、时限、能源参数或固定波次，则必须从受影响的最早问题开始顺序重算，避免混用不同版本的路线、通信分段和分区资源结果。

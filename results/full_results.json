@@ -11,29 +11,47 @@
   },
   "q1": {
     "trip_count": 18,
-    "energy_kwh": 59.2319864139716,
-    "duration_s": 32777.29130693076,
+    "energy_kwh": 59.240258291086526,
+    "duration_s": 32798.50016516644,
     "safe_payload_rows": 45
   },
   "q2": {
-    "trip_count": 26,
+    "variant": "mixed_hard_soft",
+    "baseline_score": [
+      0.0,
+      111.49163934679567,
+      12696.373484158386,
+      83.01234576909263,
+      26.0
+    ],
+    "selected_score": [
+      0.0,
+      38.78738561918482,
+      9643.106358378987,
+      69.60158700859778,
+      22.0
+    ],
+    "trip_count": 22,
     "hard_late_count": 0,
-    "makespan_s": 12695.763193631043,
-    "energy_kwh": 83.00133021304487,
-    "wtd": 111.45007536160688,
-    "multi_stop_trips": 5
+    "makespan_s": 9643.106358378987,
+    "energy_kwh": 69.60158700859778,
+    "wtd": 38.78738561918482,
+    "multi_stop_trips": 4
   },
   "q3": {
+    "trip_count": 22,
     "hard_late_count": 0,
+    "soft_late_count": 32,
+    "wtd": 297.2762496860513,
     "outage_interval_count": 0,
     "grid_outage_count": 0,
-    "min_margin_lower_db": 0.1307574384664747,
-    "transport_makespan_s": 23918.718635601468,
-    "relay_makespan_s": 24472.376375029344,
-    "joint_makespan_s": 24472.376375029344,
-    "makespan_s": 24472.376375029344,
-    "transport_energy_kwh": 83.00133021304487,
-    "relay_energy_kwh": 12.718431998599364,
+    "min_margin_lower_db": 0.13970257029316713,
+    "transport_makespan_s": 23117.36241248787,
+    "relay_makespan_s": 23658.349059746757,
+    "joint_makespan_s": 23658.349059746757,
+    "makespan_s": 23658.349059746757,
+    "transport_energy_kwh": 69.60158700859778,
+    "relay_energy_kwh": 9.495538902031141,
     "proofs": [
       {
         "trip_id": "T001",
@@ -44,7 +62,7 @@
         "min_margin_lower_db": 2.214402714968543,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 1816,
+        "grid_samples": 2104,
         "grid_outages": 0,
         "grid_min_margin_db": 7.77573812848496
       },
@@ -57,7 +75,7 @@
         "min_margin_lower_db": 0.19207670619181272,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2976,
+        "grid_samples": 3264,
         "grid_outages": 0,
         "grid_min_margin_db": 2.019353016541899
       },
@@ -80,10 +98,10 @@
         "leaf_intervals": 37,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
-        "min_margin_lower_db": 0.5799632178687801,
+        "min_margin_lower_db": 0.5776532298325208,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2706,
+        "grid_samples": 2736,
         "grid_outages": 0,
         "grid_min_margin_db": 5.5661971923289
       },
@@ -109,7 +127,7 @@
         "min_margin_lower_db": 0.22187373250136488,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 3009,
+        "grid_samples": 3069,
         "grid_outages": 0,
         "grid_min_margin_db": 0.8009883626370424
       },
@@ -135,7 +153,7 @@
         "min_margin_lower_db": 0.5145078258844791,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2899,
+        "grid_samples": 2959,
         "grid_outages": 0,
         "grid_min_margin_db": 0.8009883626370424
       },
@@ -148,7 +166,7 @@
         "min_margin_lower_db": 0.3533912616792776,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 3625,
+        "grid_samples": 3913,
         "grid_outages": 0,
         "grid_min_margin_db": 4.1064326471951205
       },
@@ -187,7 +205,7 @@
         "min_margin_lower_db": 0.4645308175191616,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2821,
+        "grid_samples": 2881,
         "grid_outages": 0,
         "grid_min_margin_db": 9.561601916229193
       },
@@ -200,7 +218,7 @@
         "min_margin_lower_db": 0.2740806656540826,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2320,
+        "grid_samples": 2380,
         "grid_outages": 0,
         "grid_min_margin_db": 11.126685253263659
       },
@@ -213,7 +231,7 @@
         "min_margin_lower_db": 0.5287843535917034,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2443,
+        "grid_samples": 2515,
         "grid_outages": 0,
         "grid_min_margin_db": 6.015403469247573
       },
@@ -223,12 +241,12 @@
         "leaf_intervals": 25,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
-        "min_margin_lower_db": 2.9379773071310353,
+        "min_margin_lower_db": 2.9376551252828875,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 1723,
+        "grid_samples": 1729,
         "grid_outages": 0,
-        "grid_min_margin_db": 5.409361374777234
+        "grid_min_margin_db": 5.406370425045452
       },
       {
         "trip_id": "T016",
@@ -239,22 +257,22 @@
         "min_margin_lower_db": 2.214402714968543,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2032,
+        "grid_samples": 2176,
         "grid_outages": 0,
-        "grid_min_margin_db": 2.2144087992579955
+        "grid_min_margin_db": 3.1721776278641016
       },
       {
         "trip_id": "T017",
         "wave": "W4",
-        "leaf_intervals": 27,
+        "leaf_intervals": 44,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
-        "min_margin_lower_db": 2.214402714968543,
+        "min_margin_lower_db": 0.3172650187705983,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 2032,
+        "grid_samples": 3809,
         "grid_outages": 0,
-        "grid_min_margin_db": 2.2144087992579955
+        "grid_min_margin_db": 6.707934147744339
       },
       {
         "trip_id": "T018",
@@ -265,120 +283,68 @@
         "min_margin_lower_db": 0.19207670619181272,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 3264,
+        "grid_samples": 2801,
         "grid_outages": 0,
-        "grid_min_margin_db": 2.019353016541899
+        "grid_min_margin_db": 2.9226649794811976
       },
       {
         "trip_id": "T019",
         "wave": "W5",
-        "leaf_intervals": 45,
+        "leaf_intervals": 63,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
-        "min_margin_lower_db": 0.1307574384664747,
+        "min_margin_lower_db": 0.1670560980891196,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 3791,
+        "grid_samples": 4089,
         "grid_outages": 0,
-        "grid_min_margin_db": 3.2220427735201724
+        "grid_min_margin_db": 2.947229656019843
       },
       {
         "trip_id": "T020",
         "wave": "W6",
+        "leaf_intervals": 65,
+        "unresolved_intervals": 0,
+        "outage_intervals": 0,
+        "min_margin_lower_db": 0.2740806656540826,
+        "max_unresolved_interval_s": 0.0,
+        "grid_step_s": 0.5,
+        "grid_samples": 4199,
+        "grid_outages": 0,
+        "grid_min_margin_db": 5.18813847133967
+      },
+      {
+        "trip_id": "T021",
+        "wave": "W6",
+        "leaf_intervals": 46,
+        "unresolved_intervals": 0,
+        "outage_intervals": 0,
+        "min_margin_lower_db": 0.13970257029316713,
+        "max_unresolved_interval_s": 0.0,
+        "grid_step_s": 0.5,
+        "grid_samples": 3301,
+        "grid_outages": 0,
+        "grid_min_margin_db": 0.8009883626370424
+      },
+      {
+        "trip_id": "T022",
+        "wave": "W7",
         "leaf_intervals": 55,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
         "min_margin_lower_db": 0.3533912616792776,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
-        "grid_samples": 3913,
+        "grid_samples": 3322,
         "grid_outages": 0,
         "grid_min_margin_db": 4.1064326471951205
-      },
-      {
-        "trip_id": "T021",
-        "wave": "W6",
-        "leaf_intervals": 57,
-        "unresolved_intervals": 0,
-        "outage_intervals": 0,
-        "min_margin_lower_db": 0.16705609808880695,
-        "max_unresolved_interval_s": 0.0,
-        "grid_step_s": 0.5,
-        "grid_samples": 3508,
-        "grid_outages": 0,
-        "grid_min_margin_db": 8.530755910007372
-      },
-      {
-        "trip_id": "T022",
-        "wave": "W7",
-        "leaf_intervals": 71,
-        "unresolved_intervals": 0,
-        "outage_intervals": 0,
-        "min_margin_lower_db": 0.414641624571928,
-        "max_unresolved_interval_s": 0.0,
-        "grid_step_s": 0.5,
-        "grid_samples": 4825,
-        "grid_outages": 0,
-        "grid_min_margin_db": 9.277559146873514
-      },
-      {
-        "trip_id": "T023",
-        "wave": "W8",
-        "leaf_intervals": 63,
-        "unresolved_intervals": 0,
-        "outage_intervals": 0,
-        "min_margin_lower_db": 0.22187373250136488,
-        "max_unresolved_interval_s": 0.0,
-        "grid_step_s": 0.5,
-        "grid_samples": 4034,
-        "grid_outages": 0,
-        "grid_min_margin_db": 0.8009883626370424
-      },
-      {
-        "trip_id": "T024",
-        "wave": "W8",
-        "leaf_intervals": 49,
-        "unresolved_intervals": 0,
-        "outage_intervals": 0,
-        "min_margin_lower_db": 0.13970257029316713,
-        "max_unresolved_interval_s": 0.0,
-        "grid_step_s": 0.5,
-        "grid_samples": 3392,
-        "grid_outages": 0,
-        "grid_min_margin_db": 0.8009883626370424
-      },
-      {
-        "trip_id": "T025",
-        "wave": "W8",
-        "leaf_intervals": 39,
-        "unresolved_intervals": 0,
-        "outage_intervals": 0,
-        "min_margin_lower_db": 0.5433105905287903,
-        "max_unresolved_interval_s": 0.0,
-        "grid_step_s": 0.5,
-        "grid_samples": 2446,
-        "grid_outages": 0,
-        "grid_min_margin_db": 1.8231229503931417
-      },
-      {
-        "trip_id": "T026",
-        "wave": "W8",
-        "leaf_intervals": 46,
-        "unresolved_intervals": 0,
-        "outage_intervals": 0,
-        "min_margin_lower_db": 0.2740806656540826,
-        "max_unresolved_interval_s": 0.0,
-        "grid_step_s": 0.5,
-        "grid_samples": 3318,
-        "grid_outages": 0,
-        "grid_min_margin_db": 10.404611781789626
       }
     ]
   },
   "q4": {
     "partition_rows": 5,
     "summary_rows": 16,
-    "max_shortfall": 2
+    "max_shortfall": 1
   },
   "sanity": {
     "q1_unique_cover": true,

@@ -29,7 +29,7 @@
         "leaf_intervals": 27,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
-        "min_margin_lower_db": 2.214402714968557,
+        "min_margin_lower_db": 2.214402714968543,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
         "grid_samples": 2104,
@@ -112,7 +112,7 @@
         "grid_step_s": 0.5,
         "grid_samples": 2506,
         "grid_outages": 0,
-        "grid_min_margin_db": 1.8231229503931274
+        "grid_min_margin_db": 1.8231229503931417
       },
       {
         "trip_id": "T008",
@@ -224,7 +224,7 @@
         "leaf_intervals": 27,
         "unresolved_intervals": 0,
         "outage_intervals": 0,
-        "min_margin_lower_db": 2.214402714968557,
+        "min_margin_lower_db": 2.214402714968543,
         "max_unresolved_interval_s": 0.0,
         "grid_step_s": 0.5,
         "grid_samples": 2176,

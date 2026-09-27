@@ -1,4 +1,4 @@
-K,resource,total_group_need,inventory,shortfall,central_need,partition_redundancy
+﻿K,resource,total_group_need,inventory,shortfall,central_need,partition_redundancy
 2,A_uav,4,4,0,4,0
 2,B_uav,2,2,0,2,0
 2,C_uav,2,2,0,2,0
